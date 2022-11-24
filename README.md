@@ -14,3 +14,6 @@ utility to their workouts such as
 (2) a set/rep tracker
 (3) links to external tutorials for specific exercises
 <p>
+  <p>Find my wireframe
+    <a href="https://whimsical.com/gym-buddy-app-v1-54CyXXrZQNZ9egsijsxe7C" alt="">here</a>
+  </p>
