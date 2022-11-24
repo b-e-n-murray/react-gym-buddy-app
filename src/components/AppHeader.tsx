@@ -1,11 +1,11 @@
 import React from "react";
 
 function AppHeader(): JSX.Element {
-return (
+  return (
     <div className="appHeader">
-        <h1>Gym Buddy</h1>
+      <h1>Gym Buddy</h1>
     </div>
-)
+  );
 }
 
-export default AppHeader
+export default AppHeader;
