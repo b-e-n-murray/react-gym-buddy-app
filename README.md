@@ -1,5 +1,16 @@
-# Simplified CRA starter
+# Gym Buddy Application
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a>
+<h3>Solo React Project<h3>
+<hr/>
+<p>
+My goal for this project was to create a functional, gym-assistance app.
+The iOS App Store offers very little in terms of a cheap, user-friendly 
+gym app that makes for simple but effective tracking of exercise volume and time.
 
-> This is part of Academy's technical curriculum for **The Mark**. All parts of that curriculum, including this project, are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>
+This app will offer a simple but and free option for gym users who want to add
+utility to their workouts such as 
+
+(1) a stopwatch with lap and reset functionality
+(2) a set/rep tracker
+(3) links to external tutorials for specific exercises
+<p>
