@@ -1,0 +1,9 @@
+:root {
+    background-color: slategrey;
+}
+
+.appHeader {
+    text-align: center;
+    color: azure;
+    font-family: monospace;
+}
