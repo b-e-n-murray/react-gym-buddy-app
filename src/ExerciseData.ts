@@ -17,5 +17,37 @@ export const ExerciseData: ExerciseDataProps[] =
             requirements: "Machine",
             specialty: "Muscle-building"
         },
+        {
+            name: "Barbell Bench Press",
+            target: "Chest",
+            difficulty: "Intermediate",
+            image: "",
+            requirements: "Free-weights",
+            specialty: "Strength"
+        },
+        {
+            name: "Sit up",
+            target: "Core",
+            difficulty: "Easy",
+            image: "",
+            requirements: "None",
+            specialty: "Varied"
+        },
+        {
+            name: "Barbell Squat",
+            target: ["Quads", "Hamstrings", "Glutes"],
+            difficulty: "Intermediate",
+            image: "",
+            requirements: "Free-weights",
+            specialty: "Varied"
+        },
+        {
+            name: "Skullcrushers",
+            target: "Triceps",
+            difficulty: "Hard",
+            image: "",
+            requirements: "Free-weights",
+            specialty: "Muscle-building"
+        },
 
     ]
