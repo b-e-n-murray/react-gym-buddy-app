@@ -1,4 +1,5 @@
 // import { useState } from "react";
+import { useState } from "react";
 import { ExerciseDataProps } from "../ExerciseData";
 
 interface ExerciseDataListProps {
@@ -6,32 +7,38 @@ interface ExerciseDataListProps {
 }
 
 function UserPrompts(props: ExerciseDataListProps): JSX.Element {
-    //   const [currentExerciseList, setCurrentExerciseList] = useState<any[]>([]);
-
-    //   const chestExerciseSelected = () => {
-    //     if (
-    //       !currentExerciseList.includes(props.listOfExercises /*target = Chest */)
-    //     )
-    //       setCurrentExerciseList([...currentExerciseList, props.listOfExercises]);
-    //     //target must include "Chest"
-    //   };
-    //   console.log(currentExerciseList);
-
-    function CheckBoxTest() {
-        return console.log("checkbox has been clicked")
+    const [targetMuscles, setTargetMuscles] = useState<string[]>([])
+    const chestSelected = () => {
+        setTargetMuscles([...targetMuscles, "Chest"])}
+    const backSelected = () => {
+        setTargetMuscles([...targetMuscles, "Back"])}
+    const tricepsSelected = () => {
+        setTargetMuscles([...targetMuscles, "Triceps"])}
+    const quadsSelected = () => {
+        setTargetMuscles([...targetMuscles, "Quads"])}
+    const hamstringsSelected = () => {
+        setTargetMuscles([...targetMuscles, "Hamstrings"])}
+    const glutesSelected = () => {
+        setTargetMuscles([...targetMuscles, "Glutes"])}
+    const coreSelected = () => {
+        setTargetMuscles([...targetMuscles, "Core"])}
+    
+        console.log(targetMuscles)
+    function handleData(submitData: any) {
+        submitData.preventDefault()
     }
     return (
         <>
             <p>What body part(s) do you want to train? (3 Maximum)</p>
-            <form>
-                <input type="checkbox" onClick={CheckBoxTest}/><span>Chest</span>
-                <input type="checkbox" /><span>Back</span>
-                <input type="checkbox" /><span>Triceps</span>
-                <input type="checkbox" /><span>Quads</span>
-                <input type="checkbox" /><span>Hamstrings</span>
-                <input type="checkbox" /><span>Glutes</span>
-                <input type="checkbox" /><span>Core</span>
-            </form>
+            <form onSubmit={handleData}>
+                <input type="checkbox" onClick={chestSelected}/><span>Chest</span>
+                <input type="checkbox" onClick={backSelected}/><span>Back</span>
+                <input type="checkbox" onClick={tricepsSelected}/><span>Triceps</span>
+                <input type="checkbox" onClick={quadsSelected}/><span>Quads</span>
+                <input type="checkbox" onClick={hamstringsSelected}/><span>Hamstrings</span>
+                <input type="checkbox" onClick={glutesSelected}/><span>Glutes</span>
+                <input type="checkbox" onClick={coreSelected}/><span>Core</span>
+            
             <p>Choose a balance for the workout:</p>
             <p>Select desired difficulty for your workout:</p>
             <select>
@@ -57,6 +64,13 @@ function UserPrompts(props: ExerciseDataListProps): JSX.Element {
                 Varied
             </option>
             </select>
+            <br /> <br />
+            <br /> <br />
+            <span>You have selected a {targetMuscles}
+            workout</span>
+            <br /> <br />
+            <button type="submit" >Generate Workout</button>
+            </form>
         </>
     );
 }
