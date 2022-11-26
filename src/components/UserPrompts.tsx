@@ -1,42 +1,64 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { ExerciseDataProps } from "../ExerciseData";
 
 interface ExerciseDataListProps {
-  listOfExercises: ExerciseDataProps[];
+    listOfExercises: ExerciseDataProps[];
 }
 
 function UserPrompts(props: ExerciseDataListProps): JSX.Element {
-  const [currentExerciseList, setCurrentExerciseList] = useState<any[]>([]);
+    //   const [currentExerciseList, setCurrentExerciseList] = useState<any[]>([]);
 
-  const chestExerciseSelected = () => {
-    if (
-      !currentExerciseList.includes(props.listOfExercises /*target = Chest */)
-    )
-      setCurrentExerciseList([...currentExerciseList, props.listOfExercises]);
-    //target must include "Chest"
-  };
-  console.log(currentExerciseList);
-  return (
-    <>
-      <p>What body part(s) do you want to train?</p>
-      <button onClick={chestExerciseSelected}>Chest</button>
-      {/* <button onClick={GetAnExercise}>Back</button>
-            <button onClick={GetAnExercise}>Triceps</button>
-            <button onClick={GetAnExercise}>Quads</button>
-            <button onClick={GetAnExercise}>Hamstrings</button>
-            <button onClick={GetAnExercise}>Glutes</button>
-            <button onClick={GetAnExercise}>Core</button> */}
-      <p>Choose a balance for the workout:</p>
-      <p>Select desired difficulty for your workout:</p>
-      <button>Easy</button>
-      <button>Intermediate</button>
-      <button>Hard</button>
-      <p>What are your goals for the workout?</p>
-      <button>Build Muscle</button>
-      <button>Get Stronger</button>
-      <button>Varied</button>
-    </>
-  );
+    //   const chestExerciseSelected = () => {
+    //     if (
+    //       !currentExerciseList.includes(props.listOfExercises /*target = Chest */)
+    //     )
+    //       setCurrentExerciseList([...currentExerciseList, props.listOfExercises]);
+    //     //target must include "Chest"
+    //   };
+    //   console.log(currentExerciseList);
+
+    function CheckBoxTest() {
+        return console.log("checkbox has been clicked")
+    }
+    return (
+        <>
+            <p>What body part(s) do you want to train? (3 Maximum)</p>
+            <form>
+                <input type="checkbox" onClick={CheckBoxTest}/><span>Chest</span>
+                <input type="checkbox" /><span>Back</span>
+                <input type="checkbox" /><span>Triceps</span>
+                <input type="checkbox" /><span>Quads</span>
+                <input type="checkbox" /><span>Hamstrings</span>
+                <input type="checkbox" /><span>Glutes</span>
+                <input type="checkbox" /><span>Core</span>
+            </form>
+            <p>Choose a balance for the workout:</p>
+            <p>Select desired difficulty for your workout:</p>
+            <select>
+                <option>
+                    Easy
+                </option>
+                <option>
+                    Intermediate
+                </option>
+                <option>
+                    Hard
+                </option>
+            </select>
+            <p>What are your goals for the workout?</p>
+            <select>
+            <option>
+                Build Muscle
+            </option>
+            <option>
+                Get Stronger
+            </option>
+            <option>
+                Varied
+            </option>
+            </select>
+        </>
+    );
 }
 
 export default UserPrompts;

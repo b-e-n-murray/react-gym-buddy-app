@@ -6,8 +6,8 @@ import { ExerciseData } from "./ExerciseData";
 function App(): JSX.Element {
   return (
     <>
-      <AppHeader />
-      <UserPrompts listOfExercises={ExerciseData} />
+        <AppHeader />
+        <UserPrompts listOfExercises={ExerciseData} />
     </>
   );
 }
