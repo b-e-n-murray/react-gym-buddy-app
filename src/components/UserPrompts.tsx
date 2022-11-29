@@ -20,37 +20,120 @@ function UserPrompts(props: ExerciseDataListProps): JSX.Element {
       <form onSubmit={handleData}>
         <input
           type="checkbox"
-          onChange={(e) => setTargetMuscles([...targetMuscles, "Chest"])}
+          onChange={(e) => {
+            if (targetMuscles.includes("Chest")) {
+              setTargetMuscles(
+                targetMuscles.filter((targetMuscle) => {
+                  return targetMuscle !== "Chest";
+                })
+              );
+            }
+            if (!targetMuscles.includes("Chest") && targetMuscles.length < 3) {
+              setTargetMuscles([...targetMuscles, "Chest"]);
+            }
+          }}
         />
         <span>Chest</span>
         <input
           type="checkbox"
-          onChange={(e) => setTargetMuscles([...targetMuscles, "Back"])}
+          onChange={(e) => {
+            if (targetMuscles.includes("Back")) {
+              setTargetMuscles(
+                targetMuscles.filter((targetMuscle) => {
+                  return targetMuscle !== "Back";
+                })
+              );
+            }
+            if (!targetMuscles.includes("Back") && targetMuscles.length < 3) {
+              setTargetMuscles([...targetMuscles, "Back"]);
+            }
+          }}
         />
         <span>Back</span>
         <input
           type="checkbox"
-          onChange={(e) => setTargetMuscles([...targetMuscles, "Triceps"])}
+          onChange={(e) => {
+            if (targetMuscles.includes("Triceps")) {
+              setTargetMuscles(
+                targetMuscles.filter((targetMuscle) => {
+                  return targetMuscle !== "Triceps";
+                })
+              );
+            }
+            if (
+              !targetMuscles.includes("Triceps") &&
+              targetMuscles.length < 3
+            ) {
+              setTargetMuscles([...targetMuscles, "Triceps"]);
+            }
+          }}
         />
         <span>Triceps</span>
         <input
           type="checkbox"
-          onChange={(e) => setTargetMuscles([...targetMuscles, "Quads"])}
+          onChange={(e) => {
+            if (targetMuscles.includes("Quads")) {
+              setTargetMuscles(
+                targetMuscles.filter((targetMuscle) => {
+                  return targetMuscle !== "Quads";
+                })
+              );
+            }
+            if (!targetMuscles.includes("Quads") && targetMuscles.length < 3) {
+              setTargetMuscles([...targetMuscles, "Quads"]);
+            }
+          }}
         />
         <span>Quads</span>
         <input
           type="checkbox"
-          onChange={(e) => setTargetMuscles([...targetMuscles, "Hamstrings"])}
+          onChange={(e) => {
+            if (targetMuscles.includes("Hamstrings")) {
+              setTargetMuscles(
+                targetMuscles.filter((targetMuscle) => {
+                  return targetMuscle !== "Hamstrings";
+                })
+              );
+            }
+            if (
+              !targetMuscles.includes("Hamstrings") &&
+              targetMuscles.length < 3
+            ) {
+              setTargetMuscles([...targetMuscles, "Hamstrings"]);
+            }
+          }}
         />
         <span>Hamstrings</span>
         <input
           type="checkbox"
-          onChange={(e) => setTargetMuscles([...targetMuscles, "Glutes"])}
+          onChange={(e) => {
+            if (targetMuscles.includes("Glutes")) {
+              setTargetMuscles(
+                targetMuscles.filter((targetMuscle) => {
+                  return targetMuscle !== "Glutes";
+                })
+              );
+            }
+            if (!targetMuscles.includes("Glutes") && targetMuscles.length < 3) {
+              setTargetMuscles([...targetMuscles, "Glutes"]);
+            }
+          }}
         />
         <span>Glutes</span>
         <input
           type="checkbox"
-          onChange={(e) => setTargetMuscles([...targetMuscles, "Core"])}
+          onChange={(e) => {
+            if (targetMuscles.includes("Core")) {
+              setTargetMuscles(
+                targetMuscles.filter((targetMuscle) => {
+                  return targetMuscle !== "Core";
+                })
+              );
+            }
+            if (!targetMuscles.includes("Core") && targetMuscles.length < 3) {
+              setTargetMuscles([...targetMuscles, "Core"]);
+            }
+          }}
         />
         <span>Core</span>
         <p>Choose a focus for the workout:</p>
@@ -90,3 +173,5 @@ function UserPrompts(props: ExerciseDataListProps): JSX.Element {
 }
 
 export default UserPrompts;
+
+//onClick={setDifficulty("Easy")}
