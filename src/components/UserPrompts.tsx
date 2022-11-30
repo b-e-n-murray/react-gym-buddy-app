@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { useState } from "react";
 import { ExerciseDataProps } from "../ExerciseData";
 
@@ -162,7 +161,17 @@ function UserPrompts(props: ExerciseDataListProps): JSX.Element {
         <br /> <br />
         <span>
           You have selected a {difficulty}
-          {targetMuscles}
+          {targetMuscles.map((targetMuscle) => {
+            if (targetMuscle === targetMuscles[0]) {
+              return `${targetMuscle} `
+            }
+            if (targetMuscle === targetMuscles[1]) {
+              return `, ${targetMuscle} `
+            }
+            if (targetMuscle === targetMuscles[2]) {
+              return `and ${targetMuscle} `
+            }
+          })}
           workout
         </span>
         <br /> <br />
