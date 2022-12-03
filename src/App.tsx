@@ -7,7 +7,7 @@ function App(): JSX.Element {
   return (
     <>
       <AppHeader />
-      <UserPrompts listOfExercises={ExerciseData} />
+      <UserPrompts />
     </>
   );
 }
