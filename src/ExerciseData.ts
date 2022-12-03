@@ -18,7 +18,7 @@ export const ExerciseData: ExerciseDataProps[] = [
   },
   {
     name: "Barbell Bench Press",
-    target: "Chest",
+    target: ["Chest", "Triceps"],
     difficulty: "Intermediate",
     image: "",
     requirements: "Free-weights",

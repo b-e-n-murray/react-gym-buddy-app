@@ -1,22 +1,39 @@
 import { useState } from "react";
-import { ExerciseDataProps } from "../ExerciseData";
+import { ExerciseDataProps, ExerciseData } from "../ExerciseData";
 
-interface ExerciseDataListProps {
-  listOfExercises: ExerciseDataProps[];
-}
-
-function UserPrompts(props: ExerciseDataListProps): JSX.Element {
+function UserPrompts(): JSX.Element {
   const [targetMuscles, setTargetMuscles] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<string>("");
+  const [workout, setWorkout] = useState<any[]>([])
 
   console.log(targetMuscles);
-  function handleData(submitData: any) {
-    submitData.preventDefault();
+
+  function handleGenerateWorkout() {
+    for (const selectedMuscle of targetMuscles) {
+      {setWorkout(
+        ExerciseData.filter((exercise) => {
+          if (exercise.target === selectedMuscle) {
+            return exercise
+            //returns an array of exercises that match selected muscles
+          }
+          else return false
+        }).map((filteredExercise) => {
+          return (
+            <>
+              <div>
+                Name: {filteredExercise.name}
+                Difficulty: {filteredExercise.difficulty}
+                Requirements: {filteredExercise.requirements}
+                Specialty: {filteredExercise.specialty}
+              </div></>
+          )
+        }))
+      }
+    }
   }
   return (
     <>
       <p>What body part(s) do you want to train? (3 Maximum)</p>
-      <form onSubmit={handleData}>
         <input
           type="checkbox"
           onChange={(e) => {
@@ -175,11 +192,12 @@ function UserPrompts(props: ExerciseDataListProps): JSX.Element {
           workout
         </span>
         <br /> <br />
-        <button type="submit">Generate Workout</button>
-      </form>
+        <button onClick={handleGenerateWorkout}>Generate Workout</button>
+      <div>{workout}</div>
     </>
   );
 }
+
 
 export default UserPrompts;
 
