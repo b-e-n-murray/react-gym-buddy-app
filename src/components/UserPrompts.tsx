@@ -5,36 +5,42 @@ function UserPrompts(): JSX.Element {
   const [targetMuscles, setTargetMuscles] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<string>("");
   const [workout, setWorkout] = useState<any[]>([])
+  //type may need to be changed from any...
 
   console.log(targetMuscles);
 
   function handleGenerateWorkout() {
     for (const selectedMuscle of targetMuscles) {
-      {setWorkout(
-        ExerciseData.filter((exercise) => {
-          if (exercise.target === selectedMuscle) {
-            return exercise
-            //returns an array of exercises that match selected muscles
-          }
-          else return false
-        }).map((filteredExercise) => {
-          return (
-            <>
-              <div>
-                Name: {filteredExercise.name}
-                Difficulty: {filteredExercise.difficulty}
-                Requirements: {filteredExercise.requirements}
-                Specialty: {filteredExercise.specialty}
-              </div></>
-          )
-        }))
+      {
+        setWorkout([workout,
+          ExerciseData.filter((exercise) => {
+            if (exercise.target === selectedMuscle) {
+              return exercise
+              //returns an array of exercises that match selected muscles
+            }
+            else return false
+          }).map((filteredExercise) => {
+            return (
+              <>
+                <div>
+                  Name: {filteredExercise.name}
+                  Difficulty: {filteredExercise.difficulty}
+                  Requirements: {filteredExercise.requirements}
+                  Specialty: {filteredExercise.specialty}
+                </div></>
+            )
+          })])
       }
     }
+    console.log(workout)
   }
   return (
     <>
-      <p>What body part(s) do you want to train? (3 Maximum)</p>
+      <div className="allInputs">
+        <p>What body part(s) do you want to train? (3 Maximum)</p>
+        <div className="selectMuscles">
         <input
+          className="muscleCheckboxes"
           type="checkbox"
           onChange={(e) => {
             if (targetMuscles.includes("Chest")) {
@@ -51,6 +57,7 @@ function UserPrompts(): JSX.Element {
         />
         <span>Chest</span>
         <input
+          className="muscleCheckboxes"
           type="checkbox"
           onChange={(e) => {
             if (targetMuscles.includes("Back")) {
@@ -67,6 +74,7 @@ function UserPrompts(): JSX.Element {
         />
         <span>Back</span>
         <input
+          className="muscleCheckboxes"
           type="checkbox"
           onChange={(e) => {
             if (targetMuscles.includes("Triceps")) {
@@ -86,6 +94,7 @@ function UserPrompts(): JSX.Element {
         />
         <span>Triceps</span>
         <input
+          className="muscleCheckboxes"
           type="checkbox"
           onChange={(e) => {
             if (targetMuscles.includes("Quads")) {
@@ -102,6 +111,7 @@ function UserPrompts(): JSX.Element {
         />
         <span>Quads</span>
         <input
+          className="muscleCheckboxes"
           type="checkbox"
           onChange={(e) => {
             if (targetMuscles.includes("Hamstrings")) {
@@ -121,6 +131,7 @@ function UserPrompts(): JSX.Element {
         />
         <span>Hamstrings</span>
         <input
+          className="muscleCheckboxes"
           type="checkbox"
           onChange={(e) => {
             if (targetMuscles.includes("Glutes")) {
@@ -137,6 +148,7 @@ function UserPrompts(): JSX.Element {
         />
         <span>Glutes</span>
         <input
+          className="muscleCheckboxes"
           type="checkbox"
           onChange={(e) => {
             if (targetMuscles.includes("Core")) {
@@ -152,8 +164,9 @@ function UserPrompts(): JSX.Element {
           }}
         />
         <span>Core</span>
+        </div>
         <p>Choose a focus for the workout:</p>
-        <select>
+        <select className="formDropdown">
           <option
             {...targetMuscles.map((targetMuscle) => {
               return { targetMuscle };
@@ -161,15 +174,17 @@ function UserPrompts(): JSX.Element {
           >
             None
           </option>
-        </select>
+        </select >
         <p>Select desired difficulty for your workout:</p>
-        <select onChange={(e) => setDifficulty(difficulty)}>
+        <select
+          className="formDropdown"
+          onChange={(e) => setDifficulty(difficulty)}>
           <option>Easy</option>
           <option>Intermediate</option>
           <option>Hard</option>
         </select>
         <p>What are your goals for the workout?</p>
-        <select>
+        <select className="formDropdown">
           <option>Build Muscle</option>
           <option>Get Stronger</option>
           <option>Varied</option>
@@ -192,8 +207,11 @@ function UserPrompts(): JSX.Element {
           workout
         </span>
         <br /> <br />
-        <button onClick={handleGenerateWorkout}>Generate Workout</button>
-      <div>{workout}</div>
+        <button
+          className="generateButton"
+          onClick={handleGenerateWorkout}>Generate Workout</button>
+        <div>{workout}</div>
+      </div>
     </>
   );
 }
