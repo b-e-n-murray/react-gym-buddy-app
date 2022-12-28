@@ -11,7 +11,7 @@ function UserPrompts(): JSX.Element {
 
   function handleGenerateWorkout() {
     for (const selectedMuscle of targetMuscles) {
-      {
+      
         setWorkout([workout,
           ExerciseData.filter((exercise) => {
             if (exercise.target === selectedMuscle) {
@@ -30,7 +30,7 @@ function UserPrompts(): JSX.Element {
                 </div></>
             )
           })])
-      }
+      
     }
     console.log(workout)
   }
@@ -203,6 +203,7 @@ function UserPrompts(): JSX.Element {
             if (targetMuscle === targetMuscles[2]) {
               return `and ${targetMuscle} `
             }
+            else return false
           })}
           workout
         </span>
