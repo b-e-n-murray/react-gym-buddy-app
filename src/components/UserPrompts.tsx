@@ -1,6 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 
+const url = 
+  process.env.NODE_ENV === "production"
+  ? ""
+  : "http://localhost:4000";
+
 interface Exercise {
   id: number,
   exercise_name: string,
@@ -19,7 +24,7 @@ function UserPrompts(): JSX.Element {
 
   async function handleGenerateWorkout() {
     console.log('fetching exercises that match your input: ', targetMuscles)
-    const fetchedExercisesData = await axios.get(`http://localhost:4000/${targetMuscles}`)
+    const fetchedExercisesData = await axios.get(`${url}/${targetMuscles}`)
     console.log('fetched: ', fetchedExercisesData)
     const exerciseArr = fetchedExercisesData.data
     console.log('array of exercises: ', fetchedExercisesData.data)
