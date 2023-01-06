@@ -223,14 +223,16 @@ function UserPrompts(): JSX.Element {
           {workout.map((exercise) => (
             <>
               <div key={exercise.id}>
-                Name: {exercise.exercise_name} <span>
+                Name: {exercise.exercise_name}{" "}
+                <span>
                   <img src={exercise.image} alt={exercise.exercise_name}></img>
-                  </span>
-                  <br/>
-                Targets: {exercise.targets.join(', ')} <br/>
-                Difficulty: {exercise.difficulty} <br/> 
-                Requirements: {exercise.requirements} <br/>
-                Specialty: {exercise.specialty} <br/><br/>
+                </span>
+                <br />
+                Targets: {exercise.targets.join(", ")} <br />
+                Difficulty: {exercise.difficulty} <br />
+                Requirements: {exercise.requirements} <br />
+                Specialty: {exercise.specialty} <br />
+                <br />
               </div>
             </>
           ))}
