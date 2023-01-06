@@ -7,11 +7,10 @@
   color: azure;
   font-family: monospace;
   font-size: xx-large;
-
 }
 
 .allInputs {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: x-large;
   font-weight: 600;
   text-align: center;
@@ -28,7 +27,7 @@
 
 .formDropdown {
   color: #fdfdfd;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: x-large;
   font-weight: 700;
   text-align: center;
@@ -38,14 +37,12 @@
 
 .generateButton {
   color: #fdfdfd;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: large;
   text-align: center;
   padding: 20px;
   background-color: rgb(40, 88, 130);
-
 }
 
 .selectMuscles {
-  
 }
