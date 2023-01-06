@@ -7,7 +7,7 @@ const url =
 interface Exercise {
   id: number;
   exercise_name: string;
-  targets: string | string[];
+  targets: string[];
   difficulty: "Easy" | "Intermediate" | "Hard";
   image: string;
   requirements: "Machine" | "Free-weights" | "None";
@@ -219,16 +219,18 @@ function UserPrompts(): JSX.Element {
         <button className="generateButton" onClick={handleGenerateWorkout}>
           Generate Workout
         </button>
-        <ul>
+        <ul className="workout">
           {workout.map((exercise) => (
             <>
               <div key={exercise.id}>
-                Name: {exercise.exercise_name}
-                <img src={exercise.image} alt={exercise.exercise_name}></img>
-                Targets: {exercise.targets}
-                Difficulty: {exercise.difficulty}
-                Requirements: {exercise.requirements}
-                Specialty: {exercise.specialty}
+                Name: {exercise.exercise_name} <span>
+                  <img src={exercise.image} alt={exercise.exercise_name}></img>
+                  </span>
+                  <br/>
+                Targets: {exercise.targets.join(', ')} <br/>
+                Difficulty: {exercise.difficulty} <br/> 
+                Requirements: {exercise.requirements} <br/>
+                Specialty: {exercise.specialty} <br/><br/>
               </div>
             </>
           ))}
