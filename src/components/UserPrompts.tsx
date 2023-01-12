@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 
 const url =
-  process.env.NODE_ENV === "production" ? "" : "http://localhost:4000";
+  process.env.NODE_ENV === "production" ? "https://b-e-n-murray-gym-buddy-app.onrender.com" : "http://localhost:4000";
 
 interface Exercise {
   id: number;
