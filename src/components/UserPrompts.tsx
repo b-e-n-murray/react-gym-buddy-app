@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 
 const url =
-  process.env.NODE_ENV === "production" ? "https://b-e-n-murray-gym-buddy-app.onrender.com" : "http://localhost:4000";
+  process.env.NODE_ENV !== "production" ? "https://b-e-n-murray-gym-buddy-app.onrender.com" : "http://localhost:4000";
 
 interface Exercise {
   id: number;
@@ -15,14 +15,17 @@ interface Exercise {
 }
 function UserPrompts(): JSX.Element {
   const [targetMuscles, setTargetMuscles] = useState<string[]>([]);
-  const [difficulty, setDifficulty] = useState<string>("");
+  const [difficulty, setDifficulty] = useState<string>("Easy");
+  const [goal, setGoal] = useState<string>("Muscle-building");
   const [workout, setWorkout] = useState<Exercise[]>([]);
 
   console.log("Currently selected muscles: ", targetMuscles);
+  console.log("Currently selected difficulty: ", difficulty);
+  console.log("Currently selected goal: ", goal);
 
   async function handleGenerateWorkout() {
     console.log("fetching exercises that match your input: ", targetMuscles);
-    const fetchedExercisesData = await axios.get(`${url}/${targetMuscles}`);
+    const fetchedExercisesData = await axios.get(`${url}/${targetMuscles}`); // need to change endpoint
     console.log("fetched: ", fetchedExercisesData);
     const exerciseArr = fetchedExercisesData.data;
     console.log("array of exercises: ", fetchedExercisesData.data);
@@ -173,32 +176,49 @@ function UserPrompts(): JSX.Element {
           />
           <span>Core</span>
         </div>
-        <p>Choose a focus for the workout:</p>
-        <select className="formDropdown">
-          <option
-            {...targetMuscles.map((targetMuscle) => {
-              return { targetMuscle };
-            })}
-          >
-            None
-          </option>
-        </select>
+        {/* <p>Choose a focus for the workout:</p>
+        <select className="formDropdown"
+        {targetMuscles.map((targetMuscle, i) => {
+          return (
+            <option key={i}>{targetMuscle}</option>
+          )
+        })}
+        ></select> */}
         <p>Select desired difficulty for your workout:</p>
         <select
           className="formDropdown"
-          onChange={(e) => setDifficulty(difficulty)}
+          onChange={(e) => setDifficulty(e.target.value)}
         >
           <option>Easy</option>
           <option>Intermediate</option>
           <option>Hard</option>
         </select>
         <p>What are your goals for the workout?</p>
-        <select className="formDropdown">
-          <option>Build Muscle</option>
-          <option>Get Stronger</option>
+        <select className="formDropdown"
+        onChange={(e) => setGoal(e.target.value)}
+        >
+          <option>Muscle-building</option>
+          <option>Strength</option>
           <option>Varied</option>
         </select>
-        <br /> <br />
+        <p>Select any/all equipment you want to use/have access to</p>
+        <div>
+        <input
+            className="muscleCheckboxes"
+            type="checkbox"
+            // onChange={(e) => {  }}
+          /><span>None</span>
+          <input
+            className="muscleCheckboxes"
+            type="checkbox"
+            // onChange={(e) => {  }}
+          /><span>Machines</span>
+          <input
+            className="muscleCheckboxes"
+            type="checkbox"
+            // onChange={(e) => {  }}
+          /><span>Free-weights</span>
+          </div>
         <br /> <br />
         <span>
           You have selected a {difficulty}
