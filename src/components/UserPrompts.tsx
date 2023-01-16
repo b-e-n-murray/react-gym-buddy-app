@@ -2,7 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 
 const url =
-  process.env.NODE_ENV !== "production" ? "https://b-e-n-murray-gym-buddy-app.onrender.com" : "http://localhost:4000";
+  process.env.NODE_ENV === "production"
+    ? "https://b-e-n-murray-gym-buddy-app.onrender.com"
+    : "http://localhost:4000";
 
 interface Exercise {
   id: number;
@@ -194,8 +196,9 @@ function UserPrompts(): JSX.Element {
           <option>Hard</option>
         </select>
         <p>What are your goals for the workout?</p>
-        <select className="formDropdown"
-        onChange={(e) => setGoal(e.target.value)}
+        <select
+          className="formDropdown"
+          onChange={(e) => setGoal(e.target.value)}
         >
           <option>Muscle-building</option>
           <option>Strength</option>
@@ -203,22 +206,25 @@ function UserPrompts(): JSX.Element {
         </select>
         <p>Select any/all equipment you want to use/have access to</p>
         <div>
-        <input
-            className="muscleCheckboxes"
-            type="checkbox"
-            // onChange={(e) => {  }}
-          /><span>None</span>
           <input
             className="muscleCheckboxes"
             type="checkbox"
             // onChange={(e) => {  }}
-          /><span>Machines</span>
+          />
+          <span>None</span>
           <input
             className="muscleCheckboxes"
             type="checkbox"
             // onChange={(e) => {  }}
-          /><span>Free-weights</span>
-          </div>
+          />
+          <span>Machines</span>
+          <input
+            className="muscleCheckboxes"
+            type="checkbox"
+            // onChange={(e) => {  }}
+          />
+          <span>Free-weights</span>
+        </div>
         <br /> <br />
         <span>
           You have selected a {difficulty}
