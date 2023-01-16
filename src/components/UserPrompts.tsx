@@ -19,11 +19,13 @@ function UserPrompts(): JSX.Element {
   const [targetMuscles, setTargetMuscles] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<string>("Easy");
   const [goal, setGoal] = useState<string>("Muscle-building");
+  const [equips, setEquips] = useState<string[]>([]);
   const [workout, setWorkout] = useState<Exercise[]>([]);
 
   console.log("Currently selected muscles: ", targetMuscles);
   console.log("Currently selected difficulty: ", difficulty);
   console.log("Currently selected goal: ", goal);
+  console.log("Currently selected equips: ", equips);
 
   const muscleGroups = [
     "Chest",
@@ -34,6 +36,7 @@ function UserPrompts(): JSX.Element {
     "Glutes",
     "Core",
   ];
+  const equipOptions = ["Machines", "Free-weights"];
 
   async function handleGenerateWorkout() {
     console.log("fetching exercises that match your input: ", targetMuscles);
@@ -60,7 +63,7 @@ function UserPrompts(): JSX.Element {
                     <input
                       className="muscleCheckboxes"
                       type="checkbox"
-                      onChange={(e) => {
+                      onChange={() => {
                         if (targetMuscles.includes(muscle)) {
                           setTargetMuscles(
                             targetMuscles.filter((targetMuscle) => {
@@ -124,31 +127,54 @@ function UserPrompts(): JSX.Element {
             <option>Strength</option>
             <option>Varied</option>
           </select>
-          <p>Select any/all equipment you want to use/have access to</p>
+          <p>
+            Select any/all equipment you want to use/have access to (default
+            will be 'none')
+          </p>
           <div>
-            <input className="muscleCheckboxes" type="checkbox" />
-            <span>None</span>
-            <input className="muscleCheckboxes" type="checkbox" />
-            <span>Machines</span>
-            <input className="muscleCheckboxes" type="checkbox" />
-            <span>Free-weights</span>
+            {equipOptions.map((option) => {
+              return (
+                <>
+                  <input
+                    key={option}
+                    className="muscleCheckboxes"
+                    type="checkbox"
+                    onChange={() => {
+                      if (equips.includes(option)) {
+                        setEquips(
+                          equips.filter((targetMuscle) => {
+                            return targetMuscle !== option;
+                          })
+                        );
+                      }
+                      if (!equips.includes(option) && equips.length < 3) {
+                        setEquips([...equips, option]);
+                      }
+                    }}
+                  />
+                  <span>{option}</span>
+                </>
+              );
+            })}
           </div>
           <br /> <br />
-          <span>
-            You have selected a {difficulty}
-            {targetMuscles.map((targetMuscle) => {
-              if (targetMuscle === targetMuscles[0]) {
-                return ` ${targetMuscle} `;
-              }
-              if (targetMuscle === targetMuscles[1]) {
-                return `, ${targetMuscle} `;
-              }
-              if (targetMuscle === targetMuscles[2]) {
-                return `and ${targetMuscle} `;
-              } else return false;
-            })}
-            workout
-          </span>
+          Your workout:
+          <br />
+          Targets:
+          {targetMuscles.map((targetMuscle) => {
+            if (targetMuscle === targetMuscles[0]) {
+              return ` ${targetMuscle} `;
+            }
+            if (targetMuscle === targetMuscles[1]) {
+              return `, ${targetMuscle} `;
+            }
+            if (targetMuscle === targetMuscles[2]) {
+              return `and ${targetMuscle} `;
+            } else return false;
+          })}
+          Difficulty: {difficulty}
+          <br />
+          Goals: {equips.join(", ")}
           <br /> <br />
           <button className="generateButton" onClick={handleGenerateWorkout}>
             Generate Workout
