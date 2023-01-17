@@ -2,20 +2,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Permanent+Marker&display=swap");
 
 :root {
-  background-color: slategrey;
+  background-color: rgb(35, 42, 42);
 }
 
 .appHeader {
-  text-align: center;
   color: azure;
   font-family: "Permanent Marker", cursive;
-  font-size: xx-large;
+  font-size: x-large;
+  border: solid black 1px;
+
+  padding-left: 20px;
 }
 
 .allInputs {
   font-family: "Lato", sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 22px;
+  background-color: rgb(118, 133, 149);
+  border: 1px solid rgb(35, 42, 42);
 }
 
 .muscleCheckboxes {
