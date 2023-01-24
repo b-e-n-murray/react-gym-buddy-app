@@ -39,8 +39,9 @@ function UserPrompts(): JSX.Element {
   const equipOptions = ["Machines", "Free-weights"];
 
   async function handleGenerateWorkout() {
+    setWorkout([])
     console.log("fetching exercises that match your input: ", targetMuscles);
-    const fetchedExercisesData = await axios.get(`${url}/${targetMuscles}`); // need to change endpoint
+    const fetchedExercisesData = await axios.get(`${url}/exercises/${targetMuscles}/${difficulty}`); // need to change endpoint
     console.log("fetched: ", fetchedExercisesData);
     const exerciseArr = fetchedExercisesData.data;
     console.log("array of exercises: ", fetchedExercisesData.data);
@@ -159,7 +160,7 @@ function UserPrompts(): JSX.Element {
           </div>
           <br /> <br />
           Your workout:
-          <br />
+          <br /> <br />
           Targets:
           {targetMuscles.map((targetMuscle) => {
             if (targetMuscle === targetMuscles[0]) {
@@ -172,9 +173,12 @@ function UserPrompts(): JSX.Element {
               return `and ${targetMuscle} `;
             } else return false;
           })}
+          <br />
           Difficulty: {difficulty}
           <br />
-          Goals: {equips.join(", ")}
+          Focus: {goal}
+          <br />
+          Equipment: {equips.join(", ")}
           <br /> <br />
           <button className="generateButton" onClick={handleGenerateWorkout}>
             Generate Workout
