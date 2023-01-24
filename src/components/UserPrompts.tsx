@@ -40,10 +40,17 @@ function UserPrompts(): JSX.Element {
 
   async function handleGenerateWorkout() {
     setWorkout([])
+    if(equips.length === 0) {
+      setEquips(["None"])
+    }
     console.log("fetching exercises that match your input: ", targetMuscles);
-    const fetchedExercisesData = await axios.get(`${url}/exercises/${targetMuscles}/${difficulty}`); // need to change endpoint
+    const fetchedExercisesData = await axios.get(
+      `${url}/exercises/${targetMuscles}/${difficulty}/${goal}/${equips}`); 
     console.log("fetched: ", fetchedExercisesData);
     const exerciseArr = fetchedExercisesData.data;
+    if(exerciseArr.length === 0) {
+      alert("No exercises matched your inputs. Please modify your selections and try again.")
+    }
     console.log("array of exercises: ", fetchedExercisesData.data);
     return setWorkout(
       exerciseArr.map((exercise: Exercise) => {
