@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Permanent+Marker&display=swap");
 
 :root {
-  background-color: rgb(35, 42, 42);
+	background: #222831; 
 }
 
 .appHeader {
@@ -18,7 +18,7 @@
   font-weight: 500;
   font-size: 22px;
   color: aliceblue;
-  background-color: rgb(118, 133, 149);
+	background: #eeeeee; 
   border: 1px solid rgb(35, 42, 42);
 }
 
@@ -30,15 +30,17 @@
   border-radius: 3px;
   width: 800px;
   height: fit-content;
-  background-color: rgba(35, 42, 42, 0.577);
+	background: #0092ca; 
   margin-left: 20px;
 }
 
-.muscleCheckboxes {
+.allMusclesCheckboxes {
+  
+}
+.inputCheckbox {
   height: 20px;
   width: 40px;
   margin: auto;
-  background-color: cadetblue;
   cursor: pointer;
   opacity: 0.6;
 }
@@ -50,7 +52,7 @@
   font-weight: 700;
   text-align: center;
   padding: 8px;
-  background-color: rgb(40, 88, 130);
+	background: #3a4750; 
 }
 
 .workout-summary {
@@ -60,7 +62,7 @@
   width: 800px;
   height: fit-content;
   width: 500px;
-  background-color: rgba(35, 42, 42, 0.84);
+	background: #0074a2; 
   margin-left: 40px;
 }
 
@@ -71,12 +73,13 @@
   text-align: center;
   font-weight: 700;
   padding: 20px;
-  background-color: rgb(40, 88, 130);
+	background: #0074a2; 
   border-radius: 10px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 40px;
+  display: flex;
 }
 
 .workout {
   font-family: "Lato", sans-serif;
+  color: #222831;
 }

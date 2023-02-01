@@ -64,12 +64,13 @@ function UserPrompts(): JSX.Element {
       <div className="allInputs">
         <div className="single-input">
         <p>What body part(s) do you want to train? (3 Maximum)</p>
+        <hr />
           {targetMuscles.length < 3
             ? muscleGroups.map((muscle) => {
                 return (
-                  <div key={muscle}>
+                  <div key={muscle} className="allMusclesCheckboxes">
                     <input
-                      className="muscleCheckboxes"
+                      className="inputCheckbox"
                       type="checkbox"
                       onChange={() => {
                         if (targetMuscles.includes(muscle)) {
@@ -95,7 +96,7 @@ function UserPrompts(): JSX.Element {
                 return (
                   <div key={muscle}>
                     <input
-                      className="muscleCheckboxes"
+                      className="inputCheckbox"
                       type="checkbox"
                       onChange={(e) => {
                         if (targetMuscles.includes(muscle)) {
@@ -121,6 +122,7 @@ function UserPrompts(): JSX.Element {
               </div>
               <div className="single-input">
           <p>Select desired difficulty for your workout:</p>
+          <hr />
           <select
             className="formDropdown"
             onChange={(e) => setDifficulty(e.target.value)}
@@ -132,6 +134,7 @@ function UserPrompts(): JSX.Element {
           </div>
           <div className="single-input">
           <p>What are your goals for the workout?</p>
+          <hr />
           <select
             className="formDropdown"
             onChange={(e) => setGoal(e.target.value)}
@@ -146,19 +149,20 @@ function UserPrompts(): JSX.Element {
             Select any/all equipment you want to use/have access to (default
             will be 'none')
           </p>
+          <hr />
           <div>
             {equipOptions.map((option) => {
               return (
                 <>
                   <input
                     key={option}
-                    className="muscleCheckboxes"
+                    className="inputCheckbox"
                     type="checkbox"
                     onChange={() => {
                       if (equips.includes(option)) {
                         setEquips(
-                          equips.filter((targetMuscle) => {
-                            return targetMuscle !== option;
+                          equips.filter((equip) => {
+                            return equip !== option;
                           })
                         );
                       }
