@@ -62,8 +62,8 @@ function UserPrompts(): JSX.Element {
   return (
     <>
       <div className="allInputs">
+        <div className="single-input">
         <p>What body part(s) do you want to train? (3 Maximum)</p>
-        <div className="selectMuscles">
           {targetMuscles.length < 3
             ? muscleGroups.map((muscle) => {
                 return (
@@ -115,8 +115,11 @@ function UserPrompts(): JSX.Element {
                     />
                     <span>{muscle}</span>
                   </div>
+                  
                 );
               })}
+              </div>
+              <div className="single-input">
           <p>Select desired difficulty for your workout:</p>
           <select
             className="formDropdown"
@@ -126,6 +129,8 @@ function UserPrompts(): JSX.Element {
             <option>Intermediate</option>
             <option>Hard</option>
           </select>
+          </div>
+          <div className="single-input">
           <p>What are your goals for the workout?</p>
           <select
             className="formDropdown"
@@ -135,6 +140,8 @@ function UserPrompts(): JSX.Element {
             <option>Strength</option>
             <option>Varied</option>
           </select>
+          </div>
+          <div className="single-input">
           <p>
             Select any/all equipment you want to use/have access to (default
             will be 'none')
@@ -165,7 +172,9 @@ function UserPrompts(): JSX.Element {
               );
             })}
           </div>
+          </div>
           <br /> <br />
+          <div className="workout-summary">
           Your workout:
           <br /> <br />
           Targets:
@@ -186,6 +195,7 @@ function UserPrompts(): JSX.Element {
           Focus: {goal}
           <br />
           Equipment: {equips.join(", ")}
+          </div>
           <br /> <br />
           <button className="generateButton" onClick={handleGenerateWorkout}>
             Generate Workout
@@ -212,7 +222,6 @@ function UserPrompts(): JSX.Element {
             ))}
           </ul>
         </div>
-      </div>
     </>
   );
 }
