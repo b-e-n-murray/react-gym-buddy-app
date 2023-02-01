@@ -64,6 +64,8 @@
   width: 500px;
 	background: #0074a2; 
   margin-left: 40px;
+  font-weight: 700;
+  font-size: 24px;
 }
 
 .generateButton {

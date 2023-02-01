@@ -210,10 +210,10 @@ function UserPrompts(): JSX.Element {
                 <div key={exercise.id}>
                   Name: {exercise.exercise_name}{" "}
                   <span>
-                    <img
+                    {/* <img
                       src={exercise.image}
                       alt={exercise.exercise_name}
-                    ></img>
+                    ></img> */}
                   </span>
                   <br />
                   Targets: {exercise.targets.join(", ")} <br />
