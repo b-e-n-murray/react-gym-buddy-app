@@ -1,26 +1,19 @@
 import axios from "axios";
 import { useState } from "react";
+import filterExercises from "../utils/filter-exercises";
+import { MergedExercises } from "../utils/interfaces";
 
 const url =
   process.env.NODE_ENV === "production"
     ? "https://b-e-n-murray-gym-buddy-app.onrender.com"
     : "http://localhost:4000";
 
-interface Exercise {
-  id: number;
-  exercise_name: string;
-  targets: string[];
-  difficulty: "Easy" | "Intermediate" | "Hard";
-  image: string;
-  requirements: "Machine" | "Free-weights" | "None";
-  specialty: "Strength" | "Muscle-building" | "Varied";
-}
 function UserPrompts(): JSX.Element {
   const [targetMuscles, setTargetMuscles] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<string>("Easy");
   const [goal, setGoal] = useState<string>("Muscle-building");
   const [equips, setEquips] = useState<string[]>([]);
-  const [workout, setWorkout] = useState<Exercise[]>([]);
+  const [workout, setWorkout] = useState<MergedExercises[]>([]);
 
   console.log("Currently selected muscles: ", targetMuscles);
   console.log("Currently selected difficulty: ", difficulty);
@@ -39,32 +32,30 @@ function UserPrompts(): JSX.Element {
   const equipOptions = ["Machines", "Free-weights"];
 
   async function handleGenerateWorkout() {
-    setWorkout([])
-    if(equips.length === 0) {
-      setEquips(["None"])
+    if (equips.length === 0) {
+      setEquips(["None"]);
     }
     console.log("fetching exercises that match your input: ", targetMuscles);
     const fetchedExercisesData = await axios.get(
-      `${url}/exercises/${targetMuscles}/${difficulty}/${goal}/${equips}`); 
+      `${url}/exercises/${targetMuscles}/${difficulty}/${goal}/${equips}`
+    );
     console.log("fetched: ", fetchedExercisesData);
     const exerciseArr = fetchedExercisesData.data;
-    if(exerciseArr.length === 0) {
-      alert("No exercises matched your inputs. Please modify your selections and try again.")
+    console.log("array of exercises: ", exerciseArr);
+    if (exerciseArr.length === 0) {
+      alert(
+        "No exercises matched your inputs. Please modify your selections and try again."
+      );
     }
-    console.log("array of exercises: ", fetchedExercisesData.data);
-    return setWorkout(
-      exerciseArr.map((exercise: Exercise) => {
-        return exercise;
-      })
-    );
+    setWorkout(filterExercises(equips, goal, exerciseArr));
   }
 
   return (
     <>
       <div className="allInputs">
         <div className="single-input">
-        <p>What body part(s) do you want to train? (3 Maximum)</p>
-        <hr />
+          <p>What body part(s) do you want to train? (3 Maximum)</p>
+          <hr />
           {targetMuscles.length < 3
             ? muscleGroups.map((muscle) => {
                 return (
@@ -116,11 +107,10 @@ function UserPrompts(): JSX.Element {
                     />
                     <span>{muscle}</span>
                   </div>
-                  
                 );
               })}
-              </div>
-              <div className="single-input">
+        </div>
+        <div className="single-input">
           <p>Select desired difficulty for your workout:</p>
           <hr />
           <select
@@ -131,8 +121,8 @@ function UserPrompts(): JSX.Element {
             <option>Intermediate</option>
             <option>Hard</option>
           </select>
-          </div>
-          <div className="single-input">
+        </div>
+        <div className="single-input">
           <p>What are your goals for the workout?</p>
           <hr />
           <select
@@ -143,8 +133,8 @@ function UserPrompts(): JSX.Element {
             <option>Strength</option>
             <option>Varied</option>
           </select>
-          </div>
-          <div className="single-input">
+        </div>
+        <div className="single-input">
           <p>
             Select any/all equipment you want to use/have access to (default
             will be 'none')
@@ -176,9 +166,9 @@ function UserPrompts(): JSX.Element {
               );
             })}
           </div>
-          </div>
-          <br /> <br />
-          <div className="workout-summary">
+        </div>
+        <br /> <br />
+        <div className="workout-summary">
           Your workout:
           <br /> <br />
           Targets:
@@ -199,33 +189,30 @@ function UserPrompts(): JSX.Element {
           Focus: {goal}
           <br />
           Equipment: {equips.join(", ")}
-          </div>
-          <br /> <br />
-          <button className="generateButton" onClick={handleGenerateWorkout}>
-            Generate Workout
-          </button>
-          <ul className="workout">
-            {workout.map((exercise) => (
-              <>
-                <div key={exercise.id}>
-                  Name: {exercise.exercise_name}{" "}
-                  <span>
-                    {/* <img
-                      src={exercise.image}
-                      alt={exercise.exercise_name}
-                    ></img> */}
-                  </span>
-                  <br />
-                  Targets: {exercise.targets.join(", ")} <br />
-                  Difficulty: {exercise.difficulty} <br />
-                  Requirements: {exercise.requirements} <br />
-                  Specialty: {exercise.specialty} <br />
-                  <br />
-                </div>
-              </>
-            ))}
-          </ul>
         </div>
+        <br /> <br />
+        <button className="generateButton" onClick={handleGenerateWorkout}>
+          Generate Workout
+        </button>
+        <ul className="workout">
+          {workout.map((exercise) => (
+            <>
+              <div key={exercise.id}>
+                Name: {exercise.exercise_name} <br />
+                Target(s):{" "}
+                {typeof exercise.targeted_muscle === "string"
+                  ? exercise.targeted_muscle
+                  : exercise.targeted_muscle.join(", ")}{" "}
+                <br />
+                Exercise Difficulty: {exercise.difficulty} <br />
+                Requirements: {exercise.requirements} <br />
+                Specialty: {exercise.specialty} <br />
+                <br />
+              </div>
+            </>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
