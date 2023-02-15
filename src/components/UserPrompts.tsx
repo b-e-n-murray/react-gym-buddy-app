@@ -42,7 +42,7 @@ function UserPrompts(): JSX.Element {
     console.log("fetched: ", fetchedExercisesData);
     const exerciseArr = fetchedExercisesData.data;
     console.log("array of exercises: ", exerciseArr);
-    if (exerciseArr.length === 0) {
+    if (filterExercises(equips, goal, exerciseArr).length === 0) {
       alert(
         "No exercises matched your inputs. Please modify your selections and try again."
       );
