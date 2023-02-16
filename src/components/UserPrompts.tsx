@@ -46,167 +46,171 @@ function UserPrompts(): JSX.Element {
 
   return (
     <>
-      <div className="allInputs">
-        <div className="single-input">
-          <p>What body part(s) do you want to train? (3 Maximum)</p>
-          <hr />
-          {targetMuscles.length < 3
-            ? muscleGroups.map((muscle) => {
+      <div className="inputs-and-summary">
+        <div className="allInputs">
+          <div className="single-input">
+            <p>What body part(s) do you want to train? (3 Maximum)</p>
+            <hr />
+            {targetMuscles.length < 3
+              ? muscleGroups.map((muscle) => {
+                  return (
+                    <div key={muscle} className="allMusclesCheckboxes">
+                      <input
+                        className="inputCheckbox"
+                        type="checkbox"
+                        onChange={() => {
+                          if (targetMuscles.includes(muscle)) {
+                            setTargetMuscles(
+                              targetMuscles.filter((targetMuscle) => {
+                                return targetMuscle !== muscle;
+                              })
+                            );
+                          }
+                          if (
+                            !targetMuscles.includes(muscle) &&
+                            targetMuscles.length < 3
+                          ) {
+                            setTargetMuscles([...targetMuscles, muscle]);
+                          }
+                        }}
+                      />
+                      <span>{muscle}</span>
+                    </div>
+                  );
+                })
+              : targetMuscles.map((muscle) => {
+                  return (
+                    <div key={muscle}>
+                      <input
+                        className="inputCheckbox"
+                        type="checkbox"
+                        onChange={(e) => {
+                          if (targetMuscles.includes(muscle)) {
+                            setTargetMuscles(
+                              targetMuscles.filter((targetMuscle) => {
+                                return targetMuscle !== muscle;
+                              })
+                            );
+                          }
+                          if (
+                            !targetMuscles.includes(muscle) &&
+                            targetMuscles.length < 3
+                          ) {
+                            setTargetMuscles([...targetMuscles, muscle]);
+                          }
+                        }}
+                      />
+                      <span>{muscle}</span>
+                    </div>
+                  );
+                })}
+          </div>
+          <div className="single-input">
+            <p>Select desired difficulty for your workout:</p>
+            <hr />
+            <select
+              className="formDropdown"
+              onChange={(e) => setDifficulty(e.target.value)}
+            >
+              <option>Easy</option>
+              <option>Intermediate</option>
+              <option>Hard</option>
+            </select>
+          </div>
+          <div className="single-input">
+            <p>What are your goals for the workout?</p>
+            <hr />
+            <select
+              className="formDropdown"
+              onChange={(e) => setGoal(e.target.value)}
+            >
+              <option>Muscle-building</option>
+              <option>Strength</option>
+              <option>Varied</option>
+            </select>
+          </div>
+          <div className="single-input">
+            <p>
+              Select any/all equipment you want to use/have access to (default
+              will be 'none')
+            </p>
+            <hr />
+            <div>
+              {equipOptions.map((option) => {
                 return (
-                  <div key={muscle} className="allMusclesCheckboxes">
+                  <>
                     <input
+                      key={option}
                       className="inputCheckbox"
                       type="checkbox"
                       onChange={() => {
-                        if (targetMuscles.includes(muscle)) {
-                          setTargetMuscles(
-                            targetMuscles.filter((targetMuscle) => {
-                              return targetMuscle !== muscle;
+                        if (equips.includes(option)) {
+                          setEquips(
+                            equips.filter((equip) => {
+                              return equip !== option;
                             })
                           );
                         }
-                        if (
-                          !targetMuscles.includes(muscle) &&
-                          targetMuscles.length < 3
-                        ) {
-                          setTargetMuscles([...targetMuscles, muscle]);
+                        if (!equips.includes(option) && equips.length < 3) {
+                          setEquips([...equips, option]);
                         }
                       }}
                     />
-                    <span>{muscle}</span>
-                  </div>
-                );
-              })
-            : targetMuscles.map((muscle) => {
-                return (
-                  <div key={muscle}>
-                    <input
-                      className="inputCheckbox"
-                      type="checkbox"
-                      onChange={(e) => {
-                        if (targetMuscles.includes(muscle)) {
-                          setTargetMuscles(
-                            targetMuscles.filter((targetMuscle) => {
-                              return targetMuscle !== muscle;
-                            })
-                          );
-                        }
-                        if (
-                          !targetMuscles.includes(muscle) &&
-                          targetMuscles.length < 3
-                        ) {
-                          setTargetMuscles([...targetMuscles, muscle]);
-                        }
-                      }}
-                    />
-                    <span>{muscle}</span>
-                  </div>
+                    <span>{option}</span>
+                  </>
                 );
               })}
-        </div>
-        <div className="single-input">
-          <p>Select desired difficulty for your workout:</p>
-          <hr />
-          <select
-            className="formDropdown"
-            onChange={(e) => setDifficulty(e.target.value)}
-          >
-            <option>Easy</option>
-            <option>Intermediate</option>
-            <option>Hard</option>
-          </select>
-        </div>
-        <div className="single-input">
-          <p>What are your goals for the workout?</p>
-          <hr />
-          <select
-            className="formDropdown"
-            onChange={(e) => setGoal(e.target.value)}
-          >
-            <option>Muscle-building</option>
-            <option>Strength</option>
-            <option>Varied</option>
-          </select>
-        </div>
-        <div className="single-input">
-          <p>
-            Select any/all equipment you want to use/have access to (default
-            will be 'none')
-          </p>
-          <hr />
-          <div>
-            {equipOptions.map((option) => {
-              return (
-                <>
-                  <input
-                    key={option}
-                    className="inputCheckbox"
-                    type="checkbox"
-                    onChange={() => {
-                      if (equips.includes(option)) {
-                        setEquips(
-                          equips.filter((equip) => {
-                            return equip !== option;
-                          })
-                        );
-                      }
-                      if (!equips.includes(option) && equips.length < 3) {
-                        setEquips([...equips, option]);
-                      }
-                    }}
-                  />
-                  <span>{option}</span>
-                </>
-              );
-            })}
+            </div>
           </div>
-        </div>
-        <br /> <br />
-        <div className="workout-summary">
-          Your workout:
           <br /> <br />
-          Targets:
-          {targetMuscles.map((targetMuscle) => {
-            if (targetMuscle === targetMuscles[0]) {
-              return ` ${targetMuscle} `;
-            }
-            if (targetMuscle === targetMuscles[1]) {
-              return `, ${targetMuscle} `;
-            }
-            if (targetMuscle === targetMuscles[2]) {
-              return `and ${targetMuscle} `;
-            } else return false;
-          })}
-          <br />
-          Difficulty: {difficulty}
-          <br />
-          Focus: {goal}
-          <br />
-          Equipment: {equips.join(", ")}
         </div>
-        <br /> <br />
-        <button className="generateButton" onClick={handleGenerateWorkout}>
-          Generate Workout
-        </button>
-        <ul className="workout">
-          {workout.map((exercise) => (
-            <>
-              <div key={exercise.id}>
-                Name: {exercise.exercise_name} <br />
-                Target(s):{" "}
-                {typeof exercise.targeted_muscle === "string"
-                  ? exercise.targeted_muscle
-                  : exercise.targeted_muscle.join(", ")}{" "}
-                <br />
-                Exercise Difficulty: {exercise.difficulty} <br />
-                Requirements: {exercise.requirements} <br />
-                Specialty: {exercise.specialty} <br />
-                <br />
-              </div>
-            </>
-          ))}
-        </ul>
+        <div className="summary-and-btn-ctn">
+          <div className="workout-summary">
+            Your workout:
+            <br /> <br />
+            Targets:
+            {targetMuscles.map((targetMuscle) => {
+              if (targetMuscle === targetMuscles[0]) {
+                return ` ${targetMuscle} `;
+              }
+              if (targetMuscle === targetMuscles[1]) {
+                return `, ${targetMuscle} `;
+              }
+              if (targetMuscle === targetMuscles[2]) {
+                return `and ${targetMuscle} `;
+              } else return false;
+            })}
+            <br />
+            Difficulty: {difficulty}
+            <br />
+            Focus: {goal}
+            <br />
+            Equipment: {equips.join(", ")}
+          </div>
+          <br /> <br />
+          <button className="generateButton" onClick={handleGenerateWorkout}>
+            Generate Workout
+          </button>
+        </div>
       </div>
+      <ul className="workout">
+        {workout.map((exercise) => (
+          <>
+            <div key={exercise.id}>
+              Name: {exercise.exercise_name} <br />
+              Target(s):{" "}
+              {typeof exercise.targeted_muscle === "string"
+                ? exercise.targeted_muscle
+                : exercise.targeted_muscle.join(", ")}{" "}
+              <br />
+              Exercise Difficulty: {exercise.difficulty} <br />
+              Requirements: {exercise.requirements} <br />
+              Specialty: {exercise.specialty} <br />
+              <br />
+            </div>
+          </>
+        ))}
+      </ul>
     </>
   );
 }
