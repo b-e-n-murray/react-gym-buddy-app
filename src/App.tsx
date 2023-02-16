@@ -10,6 +10,9 @@ function App(): JSX.Element {
       <AppHeader />
       <NavBar />
       <Routes>
+        <Route path="/" element={<UserPrompts />} />
+      </Routes>
+      <Routes>
         <Route path="/generator" element={<UserPrompts />} />
       </Routes>
     </>
