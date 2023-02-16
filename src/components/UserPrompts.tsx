@@ -15,11 +15,6 @@ function UserPrompts(): JSX.Element {
   const [equips, setEquips] = useState<string[]>([]);
   const [workout, setWorkout] = useState<MergedExercises[]>([]);
 
-  console.log("Currently selected muscles: ", targetMuscles);
-  console.log("Currently selected difficulty: ", difficulty);
-  console.log("Currently selected goal: ", goal);
-  console.log("Currently selected equips: ", equips);
-
   const muscleGroups = [
     "Chest",
     "Back",
@@ -41,7 +36,6 @@ function UserPrompts(): JSX.Element {
     );
     console.log("fetched: ", fetchedExercisesData);
     const exerciseArr = fetchedExercisesData.data;
-    console.log("array of exercises: ", exerciseArr);
     if (filterExercises(equips, goal, exerciseArr).length === 0) {
       alert(
         "No exercises matched your inputs. Please modify your selections and try again."
