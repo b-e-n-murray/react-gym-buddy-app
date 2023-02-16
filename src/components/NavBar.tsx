@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 function NavBar(): JSX.Element {
+  function comingSoonAlert() {
+    alert("Feature coming soon!");
+  }
   return (
     <>
       <nav className="navbar">
@@ -16,17 +19,29 @@ function NavBar(): JSX.Element {
             </Link>
           </div>
           <div className="link-container">
-            <Link className="nav-link" to="/generator">
+            <Link
+              className="nav-link"
+              onClick={comingSoonAlert}
+              to="/generator"
+            >
               Set/Rep Tracker
             </Link>
           </div>
           <div className="link-container">
-            <Link className="nav-link" to="/generator">
+            <Link
+              className="nav-link"
+              onClick={comingSoonAlert}
+              to="/generator"
+            >
               Stopwatch
             </Link>
           </div>
           <div className="link-container">
-            <Link className="nav-link" to="/generator">
+            <Link
+              className="nav-link"
+              onClick={comingSoonAlert}
+              to="/generator"
+            >
               Login
             </Link>
           </div>
