@@ -37,7 +37,7 @@ function UserPrompts(): JSX.Element {
     }
     console.log("fetching exercises that match your input: ", targetMuscles);
     const fetchedExercisesData = await axios.get(
-      `${url}/exercises/${targetMuscles}/${difficulty}/${goal}/${equips}`
+      `${url}/exercises/${targetMuscles}`
     );
     console.log("fetched: ", fetchedExercisesData);
     const exerciseArr = fetchedExercisesData.data;
