@@ -54,57 +54,57 @@ function UserPrompts(): JSX.Element {
               <hr />
               {targetMuscles.length < 3
                 ? muscleGroups.map((muscle) => {
-                  return (
-                    <div key={muscle} className="allMusclesCheckboxes">
-                      <input
-                        className="inputCheckbox"
-                        type="checkbox"
-                        onChange={() => {
-                          if (targetMuscles.includes(muscle)) {
-                            setTargetMuscles(
-                              targetMuscles.filter((targetMuscle) => {
-                                return targetMuscle !== muscle;
-                              })
-                            );
-                          }
-                          if (
-                            !targetMuscles.includes(muscle) &&
-                            targetMuscles.length < 3
-                          ) {
-                            setTargetMuscles([...targetMuscles, muscle]);
-                          }
-                        }}
-                      />
-                      <span>{muscle}</span>
-                    </div>
-                  );
-                })
+                    return (
+                      <div key={muscle} className="allMusclesCheckboxes">
+                        <input
+                          className="inputCheckbox"
+                          type="checkbox"
+                          onChange={() => {
+                            if (targetMuscles.includes(muscle)) {
+                              setTargetMuscles(
+                                targetMuscles.filter((targetMuscle) => {
+                                  return targetMuscle !== muscle;
+                                })
+                              );
+                            }
+                            if (
+                              !targetMuscles.includes(muscle) &&
+                              targetMuscles.length < 3
+                            ) {
+                              setTargetMuscles([...targetMuscles, muscle]);
+                            }
+                          }}
+                        />
+                        <span>{muscle}</span>
+                      </div>
+                    );
+                  })
                 : targetMuscles.map((muscle) => {
-                  return (
-                    <div key={muscle}>
-                      <input
-                        className="inputCheckbox"
-                        type="checkbox"
-                        onChange={(e) => {
-                          if (targetMuscles.includes(muscle)) {
-                            setTargetMuscles(
-                              targetMuscles.filter((targetMuscle) => {
-                                return targetMuscle !== muscle;
-                              })
-                            );
-                          }
-                          if (
-                            !targetMuscles.includes(muscle) &&
-                            targetMuscles.length < 3
-                          ) {
-                            setTargetMuscles([...targetMuscles, muscle]);
-                          }
-                        }}
-                      />
-                      <span>{muscle}</span>
-                    </div>
-                  );
-                })}
+                    return (
+                      <div key={muscle}>
+                        <input
+                          className="inputCheckbox"
+                          type="checkbox"
+                          onChange={(e) => {
+                            if (targetMuscles.includes(muscle)) {
+                              setTargetMuscles(
+                                targetMuscles.filter((targetMuscle) => {
+                                  return targetMuscle !== muscle;
+                                })
+                              );
+                            }
+                            if (
+                              !targetMuscles.includes(muscle) &&
+                              targetMuscles.length < 3
+                            ) {
+                              setTargetMuscles([...targetMuscles, muscle]);
+                            }
+                          }}
+                        />
+                        <span>{muscle}</span>
+                      </div>
+                    );
+                  })}
             </div>
             <div className="single-input">
               <p>Select desired difficulty for your workout:</p>
@@ -190,7 +190,10 @@ function UserPrompts(): JSX.Element {
                 Equipment: {equips.join(", ")}
               </div>
               <br /> <br />
-              <button className="generateButton" onClick={handleGenerateWorkout}>
+              <button
+                className="generateButton"
+                onClick={handleGenerateWorkout}
+              >
                 Generate Workout
               </button>
             </div>
