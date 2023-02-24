@@ -1,5 +1,5 @@
 import "./App.css";
-import AppHeader from "./components/AppHeader";
+// import AppHeader from "./components/AppHeader";
 import UserPrompts from "./components/UserPrompts";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
@@ -7,7 +7,7 @@ import NavBar from "./components/NavBar";
 function App(): JSX.Element {
   return (
     <>
-      <AppHeader />
+      {/* <AppHeader /> */}
       <NavBar />
       <Routes>
         <Route path="/" element={<UserPrompts />} />

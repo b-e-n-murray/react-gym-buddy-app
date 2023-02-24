@@ -7,6 +7,9 @@ function NavBar(): JSX.Element {
   return (
     <>
       <nav className="navbar">
+        <Link className="appHeader" to="/generator">
+          <h1>Gym Buddy</h1>
+        </Link>
         <div className="all-nav-links">
           <div className="link-container">
             <Link className="nav-link" to="/generator">

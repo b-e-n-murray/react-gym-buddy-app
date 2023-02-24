@@ -7,15 +7,19 @@
 
 .navbar {
   background: #222831;
-  width: 100vw;
   height: 120px;
-  padding-top: 70px;
+  width: 100vw;
+  display: flex;
 }
 .all-nav-links {
   display: flex;
-  margin-left: 400px;
-  margin-top: 20px;
+  position: relative;
   width: max-content;
+  height: fit-content;
+  margin-left: 20%;
+  margin-top: 42px;
+  padding-left: 5%;
+  position: absolute;
 }
 .nav-link {
   color: #fdfdfd;
@@ -25,31 +29,43 @@
   justify-content: center;
   font-size: 24px;
   text-align: center;
-  font-weight: 700;
+  font-weight: 500;
   border-radius: 10px;
   display: flex;
-  margin-right: 50px;
+  margin-right: 90px;
+  transition: all 0.3s ease 0s;
 }
 .nav-link:hover {
   color: #0092ca;
-  font-size: 22px;
 }
 
 .appHeader {
   color: azure;
-  font-family: "Permanent Marker", cursive;
-  font-size: x-large;
-  width: fit-content;
-  height: 0px;
-  margin-left: 20px;
-}
-.inputs-and-summary {
   display: flex;
+  font-family: "Permanent Marker", cursive;
+  font-size: 27px;
+  width: 220px;
+  margin-left: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  text-shadow: 2px 2px rgb(98, 96, 219);
+}
+
+.generator-page-ctn {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: auto auto auto auto;
+  row-gap: 20px;
+}
+
+.inputs-and-summary {
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
   font-size: 22px;
   color: aliceblue;
 }
+
 .allInputs {
   width: max-content;
 }
@@ -87,6 +103,8 @@
 }
 
 .workout-summary {
+  grid-column-start: 2;
+  grid-column-end: 3;
   border: solid 2px black;
   padding: 20px;
   margin-top: 20px;
@@ -100,8 +118,13 @@
   font-size: 24px;
 }
 
+.summary-and-workout-ctn {
+  height: fit-content;
+}
+
 .summary-and-btn-ctn {
-  position: sticky;
+  height: fit-content;
+  grid-column-start: 2;
 }
 
 .generateButton {
@@ -115,7 +138,7 @@
   background: #0074a2;
   border-radius: 10px;
   margin-left: 190px;
-  display: flex;
+  /* display: flex; */
   cursor: pointer;
 }
 .generateButton:hover {
@@ -126,4 +149,6 @@
 .workout {
   font-family: "Ubuntu", sans-serif;
   color: #222831;
+  width: max-content;
+  background-color: aquamarine;
 }
