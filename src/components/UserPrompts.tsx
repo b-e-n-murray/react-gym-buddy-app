@@ -44,13 +44,13 @@ function UserPrompts(): JSX.Element {
     setWorkout(filterExercises(equips, goal, exerciseArr));
   }
   function handleGenerateNewWorkout() {
-    setWorkout([])
+    setWorkout([]);
   }
 
   return (
     <>
       <div className="generator-page-ctn">
-        {workout.length === 0 &&
+        {workout.length === 0 && (
           <div className="inputs-and-summary">
             <div className="allInputs">
               <div className="single-input">
@@ -58,57 +58,57 @@ function UserPrompts(): JSX.Element {
                 <hr />
                 {targetMuscles.length < 3
                   ? muscleGroups.map((muscle) => {
-                    return (
-                      <div key={muscle} className="allMusclesCheckboxes">
-                        <input
-                          className="inputCheckbox"
-                          type="checkbox"
-                          onChange={() => {
-                            if (targetMuscles.includes(muscle)) {
-                              setTargetMuscles(
-                                targetMuscles.filter((targetMuscle) => {
-                                  return targetMuscle !== muscle;
-                                })
-                              );
-                            }
-                            if (
-                              !targetMuscles.includes(muscle) &&
-                              targetMuscles.length < 3
-                            ) {
-                              setTargetMuscles([...targetMuscles, muscle]);
-                            }
-                          }}
-                        />
-                        <span>{muscle}</span>
-                      </div>
-                    );
-                  })
+                      return (
+                        <div key={muscle} className="allMusclesCheckboxes">
+                          <input
+                            className="inputCheckbox"
+                            type="checkbox"
+                            onChange={() => {
+                              if (targetMuscles.includes(muscle)) {
+                                setTargetMuscles(
+                                  targetMuscles.filter((targetMuscle) => {
+                                    return targetMuscle !== muscle;
+                                  })
+                                );
+                              }
+                              if (
+                                !targetMuscles.includes(muscle) &&
+                                targetMuscles.length < 3
+                              ) {
+                                setTargetMuscles([...targetMuscles, muscle]);
+                              }
+                            }}
+                          />
+                          <span>{muscle}</span>
+                        </div>
+                      );
+                    })
                   : targetMuscles.map((muscle) => {
-                    return (
-                      <div key={muscle}>
-                        <input
-                          className="inputCheckbox"
-                          type="checkbox"
-                          onChange={(e) => {
-                            if (targetMuscles.includes(muscle)) {
-                              setTargetMuscles(
-                                targetMuscles.filter((targetMuscle) => {
-                                  return targetMuscle !== muscle;
-                                })
-                              );
-                            }
-                            if (
-                              !targetMuscles.includes(muscle) &&
-                              targetMuscles.length < 3
-                            ) {
-                              setTargetMuscles([...targetMuscles, muscle]);
-                            }
-                          }}
-                        />
-                        <span>{muscle}</span>
-                      </div>
-                    );
-                  })}
+                      return (
+                        <div key={muscle}>
+                          <input
+                            className="inputCheckbox"
+                            type="checkbox"
+                            onChange={(e) => {
+                              if (targetMuscles.includes(muscle)) {
+                                setTargetMuscles(
+                                  targetMuscles.filter((targetMuscle) => {
+                                    return targetMuscle !== muscle;
+                                  })
+                                );
+                              }
+                              if (
+                                !targetMuscles.includes(muscle) &&
+                                targetMuscles.length < 3
+                              ) {
+                                setTargetMuscles([...targetMuscles, muscle]);
+                              }
+                            }}
+                          />
+                          <span>{muscle}</span>
+                        </div>
+                      );
+                    })}
               </div>
               <div className="single-input">
                 <p>Select desired difficulty for your workout:</p>
@@ -136,8 +136,8 @@ function UserPrompts(): JSX.Element {
               </div>
               <div className="single-input">
                 <p>
-                  Select any/all equipment you want to use/have access to (default
-                  will be 'none')
+                  Select any/all equipment you want to use/have access to
+                  (default will be 'none')
                 </p>
                 <hr />
                 <div>
@@ -200,12 +200,18 @@ function UserPrompts(): JSX.Element {
                 Generate Workout
               </button>
             </div>
-          </div>}
+          </div>
+        )}
 
-        {workout.length > 0 &&
+        {workout.length > 0 && (
           <div className="post-gen-page">
             <h2>Your Workout</h2>
-            <button onClick={handleGenerateNewWorkout} className="generateButton">Generate New Workout</button>
+            <button
+              onClick={handleGenerateNewWorkout}
+              className="generateButton"
+            >
+              Generate New Workout
+            </button>
             <ul className="workout">
               {workout.map((exercise) => (
                 <>
@@ -226,7 +232,7 @@ function UserPrompts(): JSX.Element {
               ))}
             </ul>
           </div>
-        }
+        )}
       </div>
     </>
   );
