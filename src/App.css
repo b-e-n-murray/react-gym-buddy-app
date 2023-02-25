@@ -53,17 +53,15 @@
 }
 
 .generator-page-ctn {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-template-rows: auto auto auto auto;
-  row-gap: 20px;
+  display: flex;
+  color: aliceblue;
 }
 
 .inputs-and-summary {
+  display: flex;
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
   font-size: 22px;
-  color: aliceblue;
 }
 
 .allInputs {
@@ -82,12 +80,9 @@
   margin-left: 20px;
 }
 
-.allMusclesCheckboxes {
-}
 .inputCheckbox {
   height: 20px;
   width: 40px;
-  margin: auto;
   cursor: pointer;
   opacity: 0.6;
 }
@@ -98,13 +93,11 @@
   font-size: 20px;
   font-weight: 700;
   text-align: center;
-  padding: 8px;
+  padding: 7px;
   background: #3a4750;
 }
 
 .workout-summary {
-  grid-column-start: 2;
-  grid-column-end: 3;
   border: solid 2px black;
   padding: 20px;
   margin-top: 20px;
@@ -116,6 +109,7 @@
   margin-left: 40px;
   font-weight: 700;
   font-size: 24px;
+  display: flex;
 }
 
 .summary-and-workout-ctn {
@@ -124,7 +118,6 @@
 
 .summary-and-btn-ctn {
   height: fit-content;
-  grid-column-start: 2;
 }
 
 .generateButton {
@@ -138,17 +131,38 @@
   background: #0074a2;
   border-radius: 10px;
   margin-left: 190px;
-  /* display: flex; */
   cursor: pointer;
+  transition: all 0.3s ease 0s;
 }
+
 .generateButton:hover {
   background-color: #0092ca;
-  font-size: 22px;
+}
+
+.generateButton:active {
+  font-size: 18px;
 }
 
 .workout {
   font-family: "Ubuntu", sans-serif;
   color: #222831;
   width: max-content;
-  background-color: aquamarine;
+  margin-top: 40px;
+  font-size: large;
+}
+
+.post-gen-page {
+}
+
+.post-gen-page button {
+  margin-left: none;
+  font-size: small;
+  margin-top: 10px;
+}
+
+.generator-page-ctn h2 {
+  color: #222831;
+  font-family: "Ubuntu", sans-serif;
+  margin-left: 15px;
+  position: absolute;
 }

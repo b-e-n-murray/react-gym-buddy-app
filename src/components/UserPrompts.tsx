@@ -43,17 +43,21 @@ function UserPrompts(): JSX.Element {
     }
     setWorkout(filterExercises(equips, goal, exerciseArr));
   }
+  function handleGenerateNewWorkout() {
+    setWorkout([])
+  }
 
   return (
     <>
       <div className="generator-page-ctn">
-        <div className="inputs-and-summary">
-          <div className="allInputs">
-            <div className="single-input">
-              <p>What body part(s) do you want to train? (3 Maximum)</p>
-              <hr />
-              {targetMuscles.length < 3
-                ? muscleGroups.map((muscle) => {
+        {workout.length === 0 &&
+          <div className="inputs-and-summary">
+            <div className="allInputs">
+              <div className="single-input">
+                <p>What body part(s) do you want to train? (3 Maximum)</p>
+                <hr />
+                {targetMuscles.length < 3
+                  ? muscleGroups.map((muscle) => {
                     return (
                       <div key={muscle} className="allMusclesCheckboxes">
                         <input
@@ -79,7 +83,7 @@ function UserPrompts(): JSX.Element {
                       </div>
                     );
                   })
-                : targetMuscles.map((muscle) => {
+                  : targetMuscles.map((muscle) => {
                     return (
                       <div key={muscle}>
                         <input
@@ -105,67 +109,66 @@ function UserPrompts(): JSX.Element {
                       </div>
                     );
                   })}
-            </div>
-            <div className="single-input">
-              <p>Select desired difficulty for your workout:</p>
-              <hr />
-              <select
-                className="formDropdown"
-                onChange={(e) => setDifficulty(e.target.value)}
-              >
-                <option>Easy</option>
-                <option>Intermediate</option>
-                <option>Hard</option>
-              </select>
-            </div>
-            <div className="single-input">
-              <p>What are your goals for the workout?</p>
-              <hr />
-              <select
-                className="formDropdown"
-                onChange={(e) => setGoal(e.target.value)}
-              >
-                <option>Muscle-building</option>
-                <option>Strength</option>
-                <option>Varied</option>
-              </select>
-            </div>
-            <div className="single-input">
-              <p>
-                Select any/all equipment you want to use/have access to (default
-                will be 'none')
-              </p>
-              <hr />
-              <div>
-                {equipOptions.map((option) => {
-                  return (
-                    <>
-                      <input
-                        key={option}
-                        className="inputCheckbox"
-                        type="checkbox"
-                        onChange={() => {
-                          if (equips.includes(option)) {
-                            setEquips(
-                              equips.filter((equip) => {
-                                return equip !== option;
-                              })
-                            );
-                          }
-                          if (!equips.includes(option) && equips.length < 3) {
-                            setEquips([...equips, option]);
-                          }
-                        }}
-                      />
-                      <span>{option}</span>
-                    </>
-                  );
-                })}
               </div>
+              <div className="single-input">
+                <p>Select desired difficulty for your workout:</p>
+                <hr />
+                <select
+                  className="formDropdown"
+                  onChange={(e) => setDifficulty(e.target.value)}
+                >
+                  <option>Easy</option>
+                  <option>Intermediate</option>
+                  <option>Hard</option>
+                </select>
+              </div>
+              <div className="single-input">
+                <p>What are your goals for the workout?</p>
+                <hr />
+                <select
+                  className="formDropdown"
+                  onChange={(e) => setGoal(e.target.value)}
+                >
+                  <option>Muscle-building</option>
+                  <option>Strength</option>
+                  <option>Varied</option>
+                </select>
+              </div>
+              <div className="single-input">
+                <p>
+                  Select any/all equipment you want to use/have access to (default
+                  will be 'none')
+                </p>
+                <hr />
+                <div>
+                  {equipOptions.map((option) => {
+                    return (
+                      <>
+                        <input
+                          key={option}
+                          className="inputCheckbox"
+                          type="checkbox"
+                          onChange={() => {
+                            if (equips.includes(option)) {
+                              setEquips(
+                                equips.filter((equip) => {
+                                  return equip !== option;
+                                })
+                              );
+                            }
+                            if (!equips.includes(option) && equips.length < 3) {
+                              setEquips([...equips, option]);
+                            }
+                          }}
+                        />
+                        <span>{option}</span>
+                      </>
+                    );
+                  })}
+                </div>
+              </div>
+              <br /> <br />
             </div>
-            <br /> <br />
-          </div>
-          <div className="summary-and-workout-ctn">
             <div className="summary-and-btn-ctn">
               <div className="workout-summary">
                 Your workout:
@@ -197,26 +200,33 @@ function UserPrompts(): JSX.Element {
                 Generate Workout
               </button>
             </div>
+          </div>}
+
+        {workout.length > 0 &&
+          <div className="post-gen-page">
+            <h2>Your Workout</h2>
+            <button onClick={handleGenerateNewWorkout} className="generateButton">Generate New Workout</button>
+            <ul className="workout">
+              {workout.map((exercise) => (
+                <>
+                  <div key={exercise.id}>
+                    <h4>Exercise {workout.indexOf(exercise) + 1}</h4>
+                    Name: {exercise.exercise_name} <br />
+                    Target(s):{" "}
+                    {typeof exercise.targeted_muscle === "string"
+                      ? exercise.targeted_muscle
+                      : exercise.targeted_muscle.join(", ")}{" "}
+                    <br />
+                    Exercise Difficulty: {exercise.difficulty} <br />
+                    Requirements: {exercise.requirements} <br />
+                    Specialty: {exercise.specialty} <br />
+                    <br />
+                  </div>
+                </>
+              ))}
+            </ul>
           </div>
-          <ul className="workout">
-            {workout.map((exercise) => (
-              <>
-                <div key={exercise.id}>
-                  Name: {exercise.exercise_name} <br />
-                  Target(s):{" "}
-                  {typeof exercise.targeted_muscle === "string"
-                    ? exercise.targeted_muscle
-                    : exercise.targeted_muscle.join(", ")}{" "}
-                  <br />
-                  Exercise Difficulty: {exercise.difficulty} <br />
-                  Requirements: {exercise.requirements} <br />
-                  Specialty: {exercise.specialty} <br />
-                  <br />
-                </div>
-              </>
-            ))}
-          </ul>
-        </div>
+        }
       </div>
     </>
   );
