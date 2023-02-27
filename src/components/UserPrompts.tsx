@@ -45,6 +45,10 @@ function UserPrompts(): JSX.Element {
   }
   function handleGenerateNewWorkout() {
     setWorkout([]);
+    setDifficulty("Easy");
+    setEquips([]);
+    setGoal("Muscle-building");
+    setTargetMuscles([]);
   }
 
   return (
