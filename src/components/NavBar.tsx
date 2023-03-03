@@ -33,8 +33,7 @@ function NavBar(): JSX.Element {
           <div className="link-container">
             <Link
               className="nav-link"
-              onClick={comingSoonAlert}
-              to="/generator"
+              to="/stopwatch"
             >
               Stopwatch
             </Link>
