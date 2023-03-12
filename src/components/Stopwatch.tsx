@@ -1,32 +1,54 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+interface Time {
+  hours: number;
+  minutes: number;
+  seconds: number;
+  milliseconds: number;
+}
 
 function Stopwatch(): JSX.Element {
   const [watchRunning, setWatchRunning] = useState(false);
-  const [currentTime, setCurrentTime] = useState<Record<string, number>>({
+  const [currentTime, setCurrentTime] = useState<Time>({
     hours: 0,
     minutes: 0,
     seconds: 0,
     milliseconds: 0,
   });
   const [intervalID, setIntervalID] = useState<NodeJS.Timeout>();
+
   function handlePause() {
     setWatchRunning(false);
     clearInterval(intervalID);
+    setIntervalID(undefined);
   }
 
   function handleStart() {
     setWatchRunning(true);
-    setIntervalID(
-      setInterval(() => {
-        setCurrentTime({
-          hours: currentTime.hours,
-          minutes: currentTime.minutes,
-          seconds: currentTime.seconds,
-          milliseconds: currentTime.milliseconds + 1,
-        });
-      }, 10)
-    );
+    const newIntervalID = setInterval(() => {
+      setCurrentTime((prevTime) => {
+        let milliseconds = prevTime.milliseconds + 1;
+        let seconds = prevTime.seconds;
+        let minutes = prevTime.minutes;
+        let hours = prevTime.hours;
+        if (milliseconds >= 100) {
+          seconds += 1;
+          milliseconds = 0;
+        }
+        if (seconds >= 60) {
+          minutes += 1;
+          seconds = 0;
+        }
+        if (minutes >= 60) {
+          hours += 1;
+          minutes = 0;
+        }
+        return { hours, minutes, seconds, milliseconds };
+      });
+    }, 10);
+    setIntervalID(newIntervalID);
   }
+
   function handleReset() {
     setCurrentTime({
       hours: 0,
@@ -34,20 +56,30 @@ function Stopwatch(): JSX.Element {
       seconds: 0,
       milliseconds: 0,
     });
+    setWatchRunning(false);
+    clearInterval(intervalID);
+    setIntervalID(undefined);
   }
 
   console.log(watchRunning);
-  console.log(
-    `hrs: ${currentTime.hours}, mins: ${currentTime.minutes}, secs: ${currentTime.seconds}, ms: ${currentTime.milliseconds}`
-  );
   return (
     <>
       <h2>Stopwatch</h2>
       <div className="stopwatch-ctn">
         <div>
-          {currentTime.hours}hrs {currentTime.minutes}mins {currentTime.seconds}
-          secs
-          {currentTime.milliseconds}ms
+          {currentTime.hours < 10 ? "0" + currentTime.hours : currentTime.hours}
+          :
+          {currentTime.minutes < 10
+            ? "0" + currentTime.minutes
+            : currentTime.minutes}
+          :
+          {currentTime.seconds < 10
+            ? "0" + currentTime.seconds
+            : currentTime.seconds}
+          :
+          {currentTime.milliseconds < 10
+            ? "0" + currentTime.milliseconds
+            : currentTime.milliseconds}
         </div>
       </div>
       {!watchRunning && <button onClick={handleStart}>Start</button>}
