@@ -164,3 +164,20 @@
   position: absolute;
   text-shadow: 1px 1px #0092ca;
 }
+
+.stopwatch-ctn {
+  display: flex;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+.time-msr {
+  border: solid 1px #fdfdfd;
+  border-radius: 8px;
+  background: #fdfdfd;
+  font-size: xx-large;
+  font-family: "Ubuntu", sans-serif;
+  padding: 5px;
+  margin-right: 5px;
+  margin-left: 5px;
+}

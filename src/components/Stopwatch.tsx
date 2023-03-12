@@ -61,25 +61,34 @@ function Stopwatch(): JSX.Element {
     setIntervalID(undefined);
   }
 
-  console.log(watchRunning);
   return (
     <>
       <h2>Stopwatch</h2>
       <div className="stopwatch-ctn">
         <div>
-          {currentTime.hours < 10 ? "0" + currentTime.hours : currentTime.hours}
+          <span className="time-msr">
+            {currentTime.hours < 10
+              ? "0" + currentTime.hours
+              : currentTime.hours}
+          </span>
           :
-          {currentTime.minutes < 10
-            ? "0" + currentTime.minutes
-            : currentTime.minutes}
+          <span className="time-msr">
+            {currentTime.minutes < 10
+              ? "0" + currentTime.minutes
+              : currentTime.minutes}
+          </span>
           :
-          {currentTime.seconds < 10
-            ? "0" + currentTime.seconds
-            : currentTime.seconds}
+          <span className="time-msr">
+            {currentTime.seconds < 10
+              ? "0" + currentTime.seconds
+              : currentTime.seconds}
+          </span>
           :
-          {currentTime.milliseconds < 10
-            ? "0" + currentTime.milliseconds
-            : currentTime.milliseconds}
+          <span className="time-msr">
+            {currentTime.milliseconds < 10
+              ? "0" + currentTime.milliseconds
+              : currentTime.milliseconds}
+          </span>
         </div>
       </div>
       {!watchRunning && <button onClick={handleStart}>Start</button>}
