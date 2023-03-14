@@ -8,13 +8,13 @@ The iOS App Store, for instance, offers very little in terms of a cheap, user-fr
 gym app that makes for simple but effective generation of workouts, and tracking of exercise volume and time.
 
 This app will offer a simple but and free option for gym users who want to add
-utility to their workouts. Here are the stages of the app (Current: Version 1)
+utility to their workouts. Here are the stages of the app (Current: Version 2.1 (Stopwatch))
 
 (V1) Users can generate a workout based on inputs such as the muscles they want to train, the difficulty, and more.
 <br />
-(V2) Users can save workouts that they have generated and make a customisable collection
+(V2) Stopwatch and set/rep tracker will allow users to track all metrics of their workout
 <br />
-(V3) Stopwatch and set/rep tracker will allow users to track all metrics of their workout
+(V3) Users can save workouts that they have generated and make a customisable collection
 </div>
   <p>Find my initial wireframe for the front-end
     <a href="https://whimsical.com/gym-buddy-app-v1-54CyXXrZQNZ9egsijsxe7C" alt="">here</a>
