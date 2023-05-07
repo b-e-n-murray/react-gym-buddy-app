@@ -594,7 +594,6 @@ video {
 
 .all-nav-links {
   display: flex;
-  /* position: relative; */
   width: -webkit-max-content;
   width: max-content;
   height: -webkit-fit-content;

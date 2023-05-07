@@ -22,7 +22,6 @@
 
 .all-nav-links {
   display: flex;
-  /* position: relative; */
   width: max-content;
   height: fit-content;
   margin-left: 20%;
