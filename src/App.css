@@ -201,53 +201,18 @@
   text-shadow: 1px 1px #0092ca;
 }
 
-.lap {
-  margin-top: 20px;
-  font-size: larger;
+@layer components {
+  .time-msr {
+    @apply border border-white rounded-lg bg-white text-7xl font-medium font-ubuntu mt-5 p-2 mx-5;
+  }
 }
 
-.laps-ctn {
-  font-family: "Ubuntu", sans-serif;
-}
+@layer components {
+  .stop-btns button {
+    @apply text-white h-100 w-200 font-marker text-2xl font-bold text-center p-5 px-5 rounded-lg cursor-pointer transition-all duration-300 ease-in-out m-5;
+  }
 
-.stopwatch-page button {
-  color: #fdfdfd;
-  height: 70px;
-  width: 120px;
-  font-family: "Permanent Marker", cursive;
-  font-size: 20px;
-  text-align: center;
-  font-weight: 700;
-  padding: 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease 0s;
-  margin-right: 10px;
-}
-
-.stopwatch-page button:hover {
-  text-shadow: 2px 2px #222831;
-  border: #eeeeee 1px;
-}
-
-.sw-btn-start {
-  background-color: #0092ca;
-  margin-left: 15px;
-}
-
-.sw-btn-start:hover {
-  text-shadow: 1px 1px #222831;
-}
-
-.sw-btn-lap {
-  background-color: #0074a2;
-  margin-left: 15px;
-}
-
-.sw-btn-pause {
-  background-color: #0074a2;
-}
-
-.sw-btn-reset {
-  background-color: #222831;
+  .stop-btns button:hover {
+    @apply shadow-text border-obsidian;
+  }
 }

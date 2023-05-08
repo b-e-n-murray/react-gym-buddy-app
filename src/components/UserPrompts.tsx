@@ -5,8 +5,8 @@ import { MergedExercises } from "../utils/interfaces";
 
 const url =
   // process.env.NODE_ENV === "production" ?
-    "https://b-e-n-murray-gym-buddy-app.onrender.com"
-    // : "http://localhost:4000";
+  "https://b-e-n-murray-gym-buddy-app.onrender.com";
+// : "http://localhost:4000";
 
 function UserPrompts(): JSX.Element {
   const [targetMuscles, setTargetMuscles] = useState<string[]>([]);
