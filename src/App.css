@@ -201,12 +201,6 @@
   text-shadow: 1px 1px #0092ca;
 }
 
-@layer components {
-  .time-msr {
-    @apply border border-offwhite rounded-lg bg-off-white text-6xl font-medium font-ubuntu p-5 mx-5;
-  }
-}
-
 .lap {
   margin-top: 20px;
   font-size: larger;
