@@ -88,27 +88,26 @@ function Stopwatch(): JSX.Element {
 
   return (
     <>
-      <div className="stopwatch-page">
-        <div className="stopwatch-ctn">
-          <span className="time-msr">
+        <div className="flex justify-center mx-auto mt-30 mb-30">
+          <span className="border border-offwhite rounded-lg bg-off-white text-6xl font-medium font-ubuntu p-5 mx-5">
             {currentTime.hours < 10
               ? "0" + currentTime.hours
               : currentTime.hours}
           </span>
           :
-          <span className="time-msr">
+          <span className="border border-offwhite rounded-lg bg-off-white text-6xl font-medium font-ubuntu p-5 mx-5">
             {currentTime.minutes < 10
               ? "0" + currentTime.minutes
               : currentTime.minutes}
           </span>
           :
-          <span className="time-msr">
+          <span className="border border-offwhite rounded-lg bg-off-white text-6xl font-medium font-ubuntu p-5 mx-5">
             {currentTime.seconds < 10
               ? "0" + currentTime.seconds
               : currentTime.seconds}
           </span>
           :
-          <span className="time-msr">
+          <span className="border border-offwhite rounded-lg bg-off-white text-6xl font-medium font-ubuntu p-5 mx-5">
             {currentTime.milliseconds < 10
               ? "0" + currentTime.milliseconds
               : currentTime.milliseconds}
@@ -148,7 +147,6 @@ function Stopwatch(): JSX.Element {
             );
           })}
         </div>
-      </div>
     </>
   );
 }

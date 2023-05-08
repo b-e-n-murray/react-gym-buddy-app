@@ -20,12 +20,13 @@ module.exports = {
     },
     colors: {
       "obsidian": "#222831",
-      "off-white": "#eeeeee",
+      "offwhite": "#eeeeee",
       "race-blue": "#0092ca",
       "dark-blue": "#0074a2",
     },
     fontFamily: {
-
+      "ubuntu": ['Ubuntu', 'sans-serif'],
+      "marker": ["Permanent Marker", "cursive"]
     },
     extend: {},
   },

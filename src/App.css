@@ -201,29 +201,10 @@
   text-shadow: 1px 1px #0092ca;
 }
 
-.stopwatch-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.stopwatch-ctn {
-  display: flex;
-  width: fit-content;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  align-items: center;
-}
-
-.time-msr {
-  border: solid 1px #fdfdfd;
-  border-radius: 8px;
-  background: #fdfdfd;
-  font-size: 85px;
-  font-family: "Ubuntu", sans-serif;
-  padding: 5px;
-  margin-right: 5px;
-  margin-left: 5px;
+@layer components {
+  .time-msr {
+    @apply border border-offwhite rounded-lg bg-off-white text-6xl font-medium font-ubuntu p-5 mx-5;
+  }
 }
 
 .lap {
