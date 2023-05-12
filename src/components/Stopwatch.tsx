@@ -88,66 +88,67 @@ function Stopwatch(): JSX.Element {
 
   return (
     <>
-      <div className="stopwatch-page">
-        <div className="stopwatch-ctn">
-          <span className="time-msr">
-            {currentTime.hours < 10
-              ? "0" + currentTime.hours
-              : currentTime.hours}
-          </span>
-          :
-          <span className="time-msr">
-            {currentTime.minutes < 10
-              ? "0" + currentTime.minutes
-              : currentTime.minutes}
-          </span>
-          :
-          <span className="time-msr">
-            {currentTime.seconds < 10
-              ? "0" + currentTime.seconds
-              : currentTime.seconds}
-          </span>
-          :
-          <span className="time-msr">
-            {currentTime.milliseconds < 10
-              ? "0" + currentTime.milliseconds
-              : currentTime.milliseconds}
-          </span>
-        </div>
-        {!watchRunning && (
-          <button onClick={handleStart} className="sw-btn-start">
-            {stopwatchInProgress(currentTime)}
-          </button>
-        )}
-        {watchRunning ? (
-          <div>
-            <button onClick={handleLap} className="sw-btn-lap">
-              Lap
+      <div className="flex justify-center mx-auto mt-30 mb-30">
+        <span className="time-msr">
+          {currentTime.hours < 10 ? "0" + currentTime.hours : currentTime.hours}
+        </span>
+        <p className="text-4xl mt-6">:</p>
+        <span className="time-msr">
+          {currentTime.minutes < 10
+            ? "0" + currentTime.minutes
+            : currentTime.minutes}
+        </span>
+        <p className="text-4xl mt-6">:</p>
+        <span className="time-msr">
+          {currentTime.seconds < 10
+            ? "0" + currentTime.seconds
+            : currentTime.seconds}
+        </span>
+        <p className="text-4xl mt-6">:</p>
+        <span className="time-msr">
+          {currentTime.milliseconds < 10
+            ? "0" + currentTime.milliseconds
+            : currentTime.milliseconds}
+        </span>
+      </div>
+      <div className="flex justify-center">
+        <div className="stop-btns">
+          {!watchRunning && (
+            <button onClick={handleStart} className="bg-race-blue">
+              {stopwatchInProgress(currentTime)}
             </button>
-            <button onClick={handlePause} className="sw-btn-pause">
-              Pause
+          )}
+          {watchRunning ? (
+            <div>
+              <button onClick={handleLap} className="bg-dark-blue">
+                Lap
+              </button>
+              <button onClick={handlePause} className="bg-dark-blue">
+                Pause
+              </button>
+            </div>
+          ) : (
+            <button onClick={handleReset} className="bg-obsidian">
+              Reset
             </button>
-          </div>
-        ) : (
-          <button onClick={handleReset} className="sw-btn-reset">
-            Reset
-          </button>
-        )}
-        <div className="laps-ctn">
-          {laps.map((time) => {
-            return (
-              <div key={laps.indexOf(time)} className="lap">
-                Lap {laps.indexOf(time) + 1}:{" "}
-                {time.hours < 10 ? "0" + time.hours : time.hours}:
-                {time.minutes < 10 ? "0" + time.minutes : time.minutes}:
-                {time.seconds < 10 ? "0" + time.seconds : time.seconds}:
-                {time.milliseconds < 10
-                  ? "0" + time.milliseconds
-                  : time.milliseconds}
-              </div>
-            );
-          })}
+          )}
         </div>
+      </div>
+
+      <div className="font-ubuntu text-3xl text-center">
+        {laps.map((time) => {
+          return (
+            <div key={laps.indexOf(time)}>
+              Lap {laps.indexOf(time) + 1}:{" "}
+              {time.hours < 10 ? "0" + time.hours : time.hours}:
+              {time.minutes < 10 ? "0" + time.minutes : time.minutes}:
+              {time.seconds < 10 ? "0" + time.seconds : time.seconds}:
+              {time.milliseconds < 10
+                ? "0" + time.milliseconds
+                : time.milliseconds}
+            </div>
+          );
+        })}
       </div>
     </>
   );
