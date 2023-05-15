@@ -67,9 +67,12 @@ function SetTracker(): JSX.Element {
                               {Object.entries(exercise.sets).map(
                                 ([setNum, reps]) => {
                                   return (
-                                      <th key={setNum} className="w-90 border border-slate-700 text-xl">
-                                        {`Set ${setNum[3]}`}
-                                      </th>
+                                    <th
+                                      key={setNum}
+                                      className="w-90 border border-slate-700 text-xl"
+                                    >
+                                      {`Set ${setNum[3]}`}
+                                    </th>
                                   );
                                 }
                               )}
@@ -85,8 +88,7 @@ function SetTracker(): JSX.Element {
                                         className="flex justify-center w-40 border border-slate-400"
                                         maxLength={3}
                                         value={reps}
-                                      >
-                                      </input>
+                                      ></input>
                                     </>
                                   );
                                 }
