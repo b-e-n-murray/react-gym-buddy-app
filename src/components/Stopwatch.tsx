@@ -88,7 +88,7 @@ function Stopwatch(): JSX.Element {
 
   return (
     <>
-      <div className="flex justify-center mx-auto mt-30 mb-30">
+      <div className="flex justify-center mx-auto mt-3 mb-3">
         <span className="time-msr">
           {currentTime.hours < 10 ? "0" + currentTime.hours : currentTime.hours}
         </span>

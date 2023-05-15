@@ -4,11 +4,17 @@ import { Link } from "react-router-dom";
 interface IExercise {
   name: string;
   notes: string;
-  set1: number;
+  sets: Record<string, number>;
+  editMode: boolean;
 }
 
 function SetTracker(): JSX.Element {
-  const emptyExercise: IExercise = { name: "", notes: "", set1: 0 };
+  const emptyExercise: IExercise = {
+    name: "",
+    notes: "",
+    sets: { set1: 0 },
+    editMode: true,
+  };
   const [exerciseList, setExerciseList] = useState<IExercise[]>([
     emptyExercise,
   ]);
@@ -45,61 +51,94 @@ function SetTracker(): JSX.Element {
             {exerciseList.map((exercise) => {
               return (
                 <>
-                  <tr>
-                    <td className="border border-slate-700 p-3">
-                      {exercise.name === "" ? (
+                  {exercise.editMode ? (
+                    <tr>
+                      <td className="border border-slate-700 p-3">
                         <input
                           placeholder="Exercise name..."
                           maxLength={50}
-                          className="w-200 border border-black-200"
+                          className="w-200 border border-black-200 pl-2 pt-1 pb-1"
                         ></input>
-                      ) : (
-                        <div>{exercise.name}</div>
-                      )}
-                    </td>
-                    <td className="flex justify-center">
-                      <table className="table-auto">
-                        <thead>
-                          <tr>
-                            <th className="w-90 border border-slate-700 text-xl">
-                              Set 1
-                            </th>
-                            <th className="w-90 border border-slate-700 text-xl">
-                              Set 2
-                            </th>
-                            <th className="w-90 border border-slate-700 text-xl">
-                              Set 3
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td className="justify-center">
-                              <input
-                                maxLength={3}
-                                className="w-40 border border-black-200"
-                              ></input>
-                            </td>
-                            <td className="justify-center">
-                              <input
-                                maxLength={3}
-                                className="w-40 border border-black-200"
-                              ></input>
-                            </td>
-                            <td className="justify-center">
-                              <input
-                                maxLength={3}
-                                className="w-40 border border-black-200"
-                              ></input>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                    <td className="border border-slate-700 p-3">
-                      <textarea className="border border-black-200"></textarea>
-                    </td>
-                  </tr>
+                      </td>
+                      <td className="flex justify-center">
+                        <table className="table-auto">
+                          <thead>
+                            <tr>
+                              {Object.entries(exercise.sets).map(
+                                ([setNum, reps]) => {
+                                  return (
+                                      <th key={setNum} className="w-90 border border-slate-700 text-xl">
+                                        {`Set ${setNum[3]}`}
+                                      </th>
+                                  );
+                                }
+                              )}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              {Object.entries(exercise.sets).map(
+                                ([setNum, reps]) => {
+                                  return (
+                                    <>
+                                      <input
+                                        className="flex justify-center w-40 border border-slate-400"
+                                        maxLength={3}
+                                        value={reps}
+                                      >
+                                      </input>
+                                    </>
+                                  );
+                                }
+                              )}
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td className="border border-slate-700 p-3">
+                        <textarea className="border border-black-200"></textarea>
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr>
+                      <td className="border border-slate-700 p-3">
+                        <p>{exercise.name}</p>
+                      </td>
+                      <td className="flex justify-center">
+                        <table className="table-auto">
+                          <thead>
+                            <tr>
+                              {Object.entries(exercise.sets).map(
+                                ([setNum, reps]) => {
+                                  return (
+                                    <>
+                                      <th className="w-90 border border-slate-700 text-xl">
+                                        {`Set ${setNum[3]}`}
+                                      </th>
+                                    </>
+                                  );
+                                }
+                              )}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {Object.entries(exercise.sets).map(
+                              ([setNum, reps]) => {
+                                return (
+                                  <>
+                                    <td>{reps}</td>
+                                  </>
+                                );
+                              }
+                            )}
+                          </tbody>
+                        </table>
+                      </td>
+                      <td className="border border-slate-700 p-3">
+                        <textarea className="border border-black-200"></textarea>
+                      </td>
+                    </tr>
+                  )}
                 </>
               );
             })}
