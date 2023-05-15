@@ -18,17 +18,17 @@ function SetTracker(): JSX.Element {
         and the table will be filled for you
       </h4>
       <div className=" flex justify-center mt-6">
-        <table className="border border-slate-500 place-content-center">
+        <table className="border border-slate-200 place-content-center">
           <thead>
             <tr>
-              <th className="border border-slate-700">Exercise</th>
-              <th className="border border-slate-700">Set 1</th>
-              <th className="border border-slate-700">Notes</th>
+              <th className="border border-slate-700 text-2xl">Exercise</th>
+              <th className="border border-slate-700 text-2xl">Reps</th>
+              <th className="border border-slate-700 text-2xl">Notes</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td className="border border-slate-700">
+              <td className="border border-slate-700 p-3">
                 <input
                   placeholder="Exercise name..."
                   maxLength={50}
@@ -36,19 +36,37 @@ function SetTracker(): JSX.Element {
                 ></input>
               </td>
               <td className="flex justify-center">
-                <input
-                  maxLength={3}
-                  className="w-30 border border-black-200"
-                ></input>
+                <table className="table-auto">
+                  <thead>
+                    <tr>
+                      <th className="w-90 border border-slate-700 text-xl">Set 1</th>
+                      <th className="w-90 border border-slate-700 text-xl">Set 2</th>
+                      <th className="w-90 border border-slate-700 text-xl">Set 3</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="justify-center">
+                        <input maxLength={3} className="w-40 border border-black-200"></input>
+                      </td>
+                      <td className="justify-center">
+                        <input maxLength={3} className="w-40 border border-black-200"></input>
+                      </td>
+                      <td className="justify-center">
+                        <input maxLength={3} className="w-40 border border-black-200"></input>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </td>
-              <td className="border border-slate-700">
-                <textarea className="w-500 border border-black-200"></textarea>
+              <td className="border border-slate-700 p-3">
+                <textarea className="border border-black-200"></textarea>
               </td>
             </tr>
           </tbody>
         </table>
-        <button className="font-ubuntu">+ Add exercise</button>
       </div>
+      <button className="font-ubuntu ml-40 bg-race-blue border border-obsidian mt-1">+ Add exercise</button>
     </>
   );
 }
