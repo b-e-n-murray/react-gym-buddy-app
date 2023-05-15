@@ -35,7 +35,7 @@ function SetTracker(): JSX.Element {
       return updatedExercises;
     });
   }
-  
+
   return (
     <>
       <h1 className="font-ubuntu justify-center text-5xl text-center mt-2 mb-1">
@@ -54,8 +54,21 @@ function SetTracker(): JSX.Element {
       </h4>
       <div className="flex justify-center">
         {exerciseList.map((exercise) => {
-          return exercise.editMode ? <button className="flex flex-col border border-slate-200 h-40 w-40 mt-10 mr-2" onClick={() => toggleEditMode(exercise)}>Done</button>
-          : <button className="border border-slate-200 h-40 w-40 mt-10 mr-2" onClick={() => toggleEditMode(exercise)}>Edit</button>
+          return exercise.editMode ? (
+            <button
+              className="flex flex-col border border-slate-200 h-40 w-40 mt-10 mr-2"
+              onClick={() => toggleEditMode(exercise)}
+            >
+              Done
+            </button>
+          ) : (
+            <button
+              className="border border-slate-200 h-40 w-40 mt-10 mr-2"
+              onClick={() => toggleEditMode(exercise)}
+            >
+              Edit
+            </button>
+          );
         })}
         <div className=" flex justify-center mt-6">
           <table className="border border-slate-200 place-content-center">
