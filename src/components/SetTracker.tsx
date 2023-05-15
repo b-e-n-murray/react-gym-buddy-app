@@ -1,6 +1,21 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
+interface IExercise {
+  name: string;
+  notes: string;
+  set1: number;
+}
+
 function SetTracker(): JSX.Element {
+  const emptyExercise: IExercise = { name: "", notes: "", set1: 0 };
+  const [exerciseList, setExerciseList] = useState<IExercise[]>([
+    emptyExercise,
+  ]);
+  function addNewExercise() {
+    setExerciseList([...exerciseList, emptyExercise]);
+    return;
+  }
   return (
     <>
       <h1 className="font-ubuntu justify-center text-5xl text-center mt-2 mb-1">
@@ -27,46 +42,76 @@ function SetTracker(): JSX.Element {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="border border-slate-700 p-3">
-                <input
-                  placeholder="Exercise name..."
-                  maxLength={50}
-                  className="w-200 border border-black-200"
-                ></input>
-              </td>
-              <td className="flex justify-center">
-                <table className="table-auto">
-                  <thead>
-                    <tr>
-                      <th className="w-90 border border-slate-700 text-xl">Set 1</th>
-                      <th className="w-90 border border-slate-700 text-xl">Set 2</th>
-                      <th className="w-90 border border-slate-700 text-xl">Set 3</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="justify-center">
-                        <input maxLength={3} className="w-40 border border-black-200"></input>
-                      </td>
-                      <td className="justify-center">
-                        <input maxLength={3} className="w-40 border border-black-200"></input>
-                      </td>
-                      <td className="justify-center">
-                        <input maxLength={3} className="w-40 border border-black-200"></input>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-              <td className="border border-slate-700 p-3">
-                <textarea className="border border-black-200"></textarea>
-              </td>
-            </tr>
+            {exerciseList.map((exercise) => {
+              return (
+                <>
+                  <tr>
+                    <td className="border border-slate-700 p-3">
+                      {exercise.name === "" ? (
+                        <input
+                          placeholder="Exercise name..."
+                          maxLength={50}
+                          className="w-200 border border-black-200"
+                        ></input>
+                      ) : (
+                        <div>{exercise.name}</div>
+                      )}
+                    </td>
+                    <td className="flex justify-center">
+                      <table className="table-auto">
+                        <thead>
+                          <tr>
+                            <th className="w-90 border border-slate-700 text-xl">
+                              Set 1
+                            </th>
+                            <th className="w-90 border border-slate-700 text-xl">
+                              Set 2
+                            </th>
+                            <th className="w-90 border border-slate-700 text-xl">
+                              Set 3
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="justify-center">
+                              <input
+                                maxLength={3}
+                                className="w-40 border border-black-200"
+                              ></input>
+                            </td>
+                            <td className="justify-center">
+                              <input
+                                maxLength={3}
+                                className="w-40 border border-black-200"
+                              ></input>
+                            </td>
+                            <td className="justify-center">
+                              <input
+                                maxLength={3}
+                                className="w-40 border border-black-200"
+                              ></input>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td className="border border-slate-700 p-3">
+                      <textarea className="border border-black-200"></textarea>
+                    </td>
+                  </tr>
+                </>
+              );
+            })}
           </tbody>
         </table>
       </div>
-      <button className="font-ubuntu ml-40 bg-race-blue border border-obsidian mt-1">+ Add exercise</button>
+      <button
+        className="font-ubuntu ml-40 bg-race-blue border border-obsidian mt-1"
+        onClick={addNewExercise}
+      >
+        + Add exercise
+      </button>
     </>
   );
 }
