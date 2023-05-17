@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface IExercise {
+  id: number;
   name: string;
   notes: string;
   sets: Record<string, number>;
@@ -9,22 +10,46 @@ interface IExercise {
 }
 
 function SetTracker(): JSX.Element {
-  const emptyExercise: IExercise = {
-    name: "",
-    notes: "",
-    sets: { set1: 0 },
-    editMode: true,
-  };
-  const [exerciseList, setExerciseList] = useState<IExercise[]>([
-    emptyExercise,
-  ]);
-  function addNewExercise() {
-    setExerciseList([...exerciseList, emptyExercise]);
+  function createEmptyExercise(): IExercise {
+    return {
+      id: exerciseList.length + 1,
+      name: "",
+      notes: "",
+      sets: { set1: 0 },
+      editMode: true,
+    };
   }
-  function toggleEditMode(exerciseToUpdate: IExercise): void {
+  const [exerciseList, setExerciseList] = useState<IExercise[]>([
+    {
+      id: 1,
+      name: "",
+      notes: "",
+      sets: { set1: 0 },
+      editMode: true,
+    }
+  ]);
+
+  function addNewExercise() {
+    setExerciseList([...exerciseList, createEmptyExercise()]);
+  }
+  function removeExercise(targetExerciseId: number) {
+    if(exerciseList.length < 2) {
+      alert("You must have at least one exercise")
+    }
+    else{
+      setExerciseList((prevState) => {
+        const updatedExercises = prevState.filter((exercise) => {
+          return exercise.id !== targetExerciseId;
+        });
+        return updatedExercises;
+      });
+    }
+  }
+
+  function toggleEditMode(exerciseId: number): void {
     setExerciseList((prevState) => {
       const updatedExercises = prevState.map((exercise) => {
-        if (exercise === exerciseToUpdate) {
+        if (exercise.id === exerciseId) {
           return {
             ...exercise,
             editMode: !exercise.editMode,
@@ -57,14 +82,14 @@ function SetTracker(): JSX.Element {
           return exercise.editMode ? (
             <button
               className="flex flex-col border border-slate-200 h-40 w-40 mt-10 mr-2"
-              onClick={() => toggleEditMode(exercise)}
+              onClick={() => toggleEditMode(exercise.id)}
             >
               Done
             </button>
           ) : (
             <button
               className="border border-slate-200 h-40 w-40 mt-10 mr-2"
-              onClick={() => toggleEditMode(exercise)}
+              onClick={() => toggleEditMode(exercise.id)}
             >
               Edit
             </button>
@@ -180,6 +205,14 @@ function SetTracker(): JSX.Element {
           </table>
         </div>
       </div>
+      {exerciseList.map((exercise) => {
+        return (
+            <button
+              className="font-ubuntu ml-40 bg-race-blue border border-obsidian mt-1"
+              onClick={() => removeExercise(exercise.id)}
+            >- Remove exercise</button>
+        );
+      })}
       <button
         className="font-ubuntu ml-40 bg-race-blue border border-obsidian mt-1"
         onClick={addNewExercise}
