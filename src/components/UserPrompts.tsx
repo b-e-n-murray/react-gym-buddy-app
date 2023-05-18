@@ -27,22 +27,27 @@ function UserPrompts(): JSX.Element {
   const equipOptions = ["Machines", "Free-weights"];
 
   async function handleGenerateWorkout() {
-    if (equips.length === 0) {
-      setEquips(["None"]);
-    }
-    console.log("fetching exercises that match your input: ", targetMuscles);
-    const fetchedExercisesData = await axios.get(
-      `${url}/exercises/${targetMuscles}`
-    );
-    // try-catch error handling
-    console.log("fetched: ", fetchedExercisesData);
-    const exerciseArr = fetchedExercisesData.data;
-    if (filterExercises(equips, goal, exerciseArr).length === 0) {
-      alert(
-        "No exercises matched your inputs. Please modify your selections and try again."
+    try {
+      if (equips.length === 0) {
+        setEquips(["None"]);
+      }
+      console.log("fetching exercises that match your input: ", targetMuscles);
+      const fetchedExercisesData = 
+      await axios.get(
+        `${url}/exercises/${targetMuscles}`
       );
+      // try-catch error handling
+      console.log("fetched: ", fetchedExercisesData);
+      const exerciseArr = fetchedExercisesData.data;
+      if (filterExercises(equips, goal, exerciseArr).length === 0) {
+        alert(
+          "No exercises matched your inputs. Please modify your selections and try again."
+        );
+      }
+      setWorkout(filterExercises(equips, goal, exerciseArr));
+    } catch (error) {
+      console.error("Internal Server Error")
     }
-    setWorkout(filterExercises(equips, goal, exerciseArr));
   }
   function handleGenerateNewWorkout() {
     setWorkout([]);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 interface IExercise {
   id: number;
@@ -45,20 +45,20 @@ function SetTracker(): JSX.Element {
     }
   }
 
-  function toggleEditMode(exerciseId: number): void {
-    setExerciseList((prevState) => {
-      const updatedExercises = prevState.map((exercise) => {
-        if (exercise.id === exerciseId) {
-          return {
-            ...exercise,
-            editMode: !exercise.editMode,
-          };
-        }
-        return exercise;
-      });
-      return updatedExercises;
-    });
-  }
+  // function toggleEditMode(exerciseId: number): void {
+  //   setExerciseList((prevState) => {
+  //     const updatedExercises = prevState.map((exercise) => {
+  //       if (exercise.id === exerciseId) {
+  //         return {
+  //           ...exercise,
+  //           editMode: !exercise.editMode,
+  //         };
+  //       }
+  //       return exercise;
+  //     });
+  //     return updatedExercises;
+  //   });
+  // }
 
   function updateExerciseName(id: number, value: string) {
     setExerciseList((prevState) => {
@@ -131,214 +131,152 @@ function SetTracker(): JSX.Element {
   }
 
   function addNewSet(setData: Record<string, number>) {
-    if (Object.entries(setData).length < 4) {
       const newSetNum: number = Object.entries(setData).length + 1;
-      setData[newSetNum] = 0;
-      return setData;
-    } else {
-      alert("4 sets is current maximum");
-      return setData;
-    }
+      const updatedSetData = { ...setData, [newSetNum]: 0 }
+      console.log(setData)
+      return updatedSetData;
   }
   return (
     <>
-      <h1 className="font-marker justify-center text-6xl text-center mt-4 mb-3">
-        Set/Rep Tracker
-      </h1>
-      <h4 className="font-ubuntu justify-center text-xl text-center">
-        Enter the exercises of your workout below and use the table to record
-        your output
-        <br />
-        Alternatively, import a workout from the
-        <Link to={"/generator"} className="underline">
-          {" "}
-          Workout Generator{" "}
-        </Link>
-        and the table will be filled for you
-      </h4>
-      <div className="flex justify-center">
-        <div className=" flex justify-center mt-6">
-          <table className="border-none">
-            <thead>
-              <tr className="border-b">
-                <th className="border-none"></th>
-                <th className="text-2xl w-300">Exercise</th>
-                <th className="text-2xl w-400">Reps</th>
-                <th className="text-2xl w-300 border-none">Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              {exerciseList.map((exercise) => {
-                return (
-                  <>
-                    {exercise.editMode ? (
-                      <tr className="border-b h-150" key={exercise.id}>
-                        <td className="p-2 items-center justify-center">
-                          <button
-                            className="border border-slate-200 h-50 w-50 mr-2 rounded-full text-center text-3xl place-content-center bg-white"
-                            onClick={() => toggleEditMode(exercise.id)}
-                          >
-                            ✔️
-                          </button>
-                        </td>
-                        <td className="p-2 flex items-center justify-center border-none mt-5">
-                          <input
-                            placeholder={
-                              exercise.name === ""
-                                ? "Exercise name..."
-                                : exercise.name
-                            }
-                            value={exercise.name === "" ? "" : exercise.name}
-                            maxLength={50}
-                            className="w-200 border border-black-200 pl-2 pt-1 pb-1"
-                            onChange={(e) =>
-                              updateExerciseName(exercise.id, e.target.value)
-                            }
-                          ></input>
-                        </td>
-                        <td>
-                          <table className="">
-                            <thead>
-                              <tr>
-                                {Object.entries(exercise.sets).map(
-                                  ([setNum, reps]) => {
-                                    return (
-                                      <th
-                                        key={setNum}
-                                        className="w-90 mr-2 border-b border-slate-700 text-xl"
-                                      >
-                                        {`Set ${setNum}`}
-                                      </th>
-                                    );
-                                  }
-                                )}
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                {Object.entries(exercise.sets).map(
-                                  ([setNum, reps]) => {
-                                    return (
-                                      <td>
-                                        <input
-                                          className="w-40 border border-slate-400 ml-4 mt-1"
-                                          type="number"
-                                          placeholder={
-                                            reps === 0
-                                              ? "0"
-                                              : JSON.stringify(reps)
-                                          }
-                                          value={reps === 0 ? "" : reps}
-                                          onChange={(e) =>
-                                            updateExerciseSet(
-                                              exercise.id,
-                                              setNum,
-                                              Number(e.target.value)
-                                            )
-                                          }
-                                        ></input>
-                                      </td>
-                                    );
-                                  }
-                                )}
-                              </tr>
-                            </tbody>
-                          </table>
-                          <button
-                            className="border border-slate-200 h-30 w-30 rounded-full text-center text-xl place-content-center bg-white"
-                            onClick={() => addSetToExercise(exercise.id)}
-                          >
-                            +
-                          </button>
-                        </td>
-                        <td className="p-2 flex items-center justify-center border-none">
-                          <textarea
-                            className="border border-black-200 w-200"
-                            value={exercise.notes === "" ? "" : exercise.notes}
-                            onChange={(e) =>
-                              updateExerciseNotes(exercise.id, e.target.value)
-                            }
-                          ></textarea>
-                        </td>
-                        <td className="p-2 items-center justify-center border-none">
-                          <button
-                            className="font-ubuntu bg-race-blue border border-obsidian mt-1 rounded-full p-3"
-                            onClick={() => removeExercise(exercise.id)}
-                          >
-                            - Remove exercise
-                          </button>
-                        </td>
-                      </tr>
-                    ) : (
-                      <tr className="border-b h-150" key={exercise.id}>
-                        <td>
-                          <button
-                            className="border border-slate-200 h-50 w-50 mr-2 text-2xl rounded-full bg-white"
-                            onClick={() => toggleEditMode(exercise.id)}
-                          >
-                            ✏️
-                          </button>
-                        </td>
-                        <td className="p-2 flex items-center justify-center border-none">
-                          <p>{exercise.name}</p>
-                        </td>
-                        <td className="flex justify-center">
-                          <table>
-                            <thead>
-                              <tr>
-                                {Object.entries(exercise.sets).map(
-                                  ([setNum, reps]) => {
-                                    return (
-                                      <>
-                                        <th className="w-90 border-b border-slate-700 text-xl">
-                                          {`Set ${setNum}`}
-                                        </th>
-                                      </>
-                                    );
-                                  }
-                                )}
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {Object.entries(exercise.sets).map(
-                                ([setNum, reps]) => {
-                                  return (
-                                    <>
-                                      <td>{reps}</td>
-                                    </>
-                                  );
+  <h1 className="font-marker text-6xl text-center mt-8 mb-4">Set/Rep Tracker</h1>
+  <h4 className="font-ubuntu text-2xl text-center">
+    Enter the exercises of your workout below and use the table to record your output.
+    <br />
+  </h4>
+  <div className="flex justify-center mt-6">
+    <div className="flex justify-center">
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className="border-b">
+            <th className="border-none"></th>
+            <th className="text-lg w-1/4">Exercise</th>
+            <th className="text-lg w-1/4">Reps</th>
+            <th className="text-lg w-1/4">Notes</th>
+            <th className="border-none"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {exerciseList.map((exercise) => {
+            return (
+              <tr className="border-b h-14" key={exercise.id}>
+                <td className="p-2">
+                  {/* {exercise.editMode ? (
+                    <button
+                      className="font-ubuntu bg-race-blue border border-obsidian rounded-full px-4 py-2 text-white mx-auto block"
+                      onClick={() => toggleEditMode(exercise.id)}
+                    >
+                      Done
+                    </button>
+                  ) : (
+                    <button
+                      className="font-ubuntu bg-race-blue border border-obsidian rounded-full px-4 py-2 text-white mx-auto block"
+                      onClick={() => toggleEditMode(exercise.id)}
+                    >
+                      Edit
+                    </button>
+                  )} */}
+                </td>
+                <td className="p-2">
+                  {exercise.editMode ? (
+                    <input
+                      placeholder={exercise.name === "" ? "Exercise name..." : exercise.name}
+                      value={exercise.name === "" ? "" : exercise.name}
+                      maxLength={50}
+                      className="w-full border border-black-200 pl-2 py-1 rounded"
+                      onChange={(e) => updateExerciseName(exercise.id, e.target.value)}
+                    />
+                  ) : (
+                    <p className="whitespace-nowrap overflow-hidden overflow-ellipsis">{exercise.name}</p>
+                  )}
+                </td>
+                <td className="flex">
+                  {exercise.editMode ? (
+                    <table className="w-full">
+                      <thead>
+                        <tr>
+                          {Object.entries(exercise.sets).map(([setNum, reps]) => (
+                            <th
+                              key={setNum}
+                              className="w-12 border-b border-slate-700 text-lg"
+                            >
+                              Set {setNum}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          {Object.entries(exercise.sets).map(([setNum, reps]) => (
+                            <td key={setNum}>
+                              <input
+                                className="w-3 border border-slate-400 ml-1"
+                                type="number"
+                                placeholder={reps === 0 ? "0" : JSON.stringify(reps)}
+                                value={reps === 0 ? "" : reps}
+                                onChange={(e) =>
+                                  updateExerciseSet(exercise.id, setNum, Number(e.target.value))
                                 }
-                              )}
-                            </tbody>
-                          </table>
-                        </td>
-                        <td className="border-none">
-                          <div>{exercise.notes}</div>
-                        </td>
-                        <td className="border-none">
-                          <button
-                            className="font-ubuntu bg-race-blue border border-obsidian rounded-full p-3"
-                            onClick={() => removeExercise(exercise.id)}
-                          >
-                            - Remove exercise
-                          </button>
-                        </td>
-                      </tr>
-                    )}
-                  </>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <button
-        className="font-ubuntu ml-40 bg-race-blue border border-obsidian mt-1 rounded-full p-3"
-        onClick={addNewExercise}
-      >
-        + Add exercise
-      </button>
-    </>
+                              />
+                            </td>
+                          ))}
+                          <td>
+                            <button
+                              className=" bg-race-blue border border-slate-200 h-8 w-20 rounded-full text-lg text-white"
+                              onClick={() => addSetToExercise(exercise.id)}
+                            >
+                              +
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  ) : (
+                    <>
+                      {Object.entries(exercise.sets).map(([setNum, reps]) => (
+                        <div
+                          key={setNum}
+                          className="w-12 h-8 border border-slate-200 flex items-center justify-center ml-1"
+                        >
+                          {reps}
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </td>
+                <td className="p-2">
+                  {exercise.editMode ? (
+                    <textarea
+                      className="w-full border border-black-200 rounded"
+                      value={exercise.notes === "" ? "" : exercise.notes}
+                      onChange={(e) => updateExerciseNotes(exercise.id, e.target.value)}
+                    />
+                  ) : (
+                    <div className="whitespace-nowrap overflow-hidden overflow-ellipsis">{exercise.notes}</div>
+                  )}
+                </td>
+                <td className="p-2">
+                  <button
+                    className="font-marker bg-red border border-obsidian mt-1 rounded-full px-4 py-2 text-white"
+                    onClick={() => removeExercise(exercise.id)}
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <button
+    className="font-marker bg-race-blue border border-obsidian mt-4 rounded-full px-4 py-2 text-white mx-auto block"
+    onClick={addNewExercise}
+  >
+    Add Exercise
+  </button>
+</>
+
   );
 }
 

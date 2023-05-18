@@ -67,6 +67,8 @@ module.exports = {
       "white": "#fdfdfd",
       "race-blue": "#0092ca",
       "dark-blue": "#0074a2",
+      "red": "#b30000",
+      "green": "#006400"
     },
     fontFamily: {
       "ubuntu": ['Ubuntu', 'sans-serif'],
