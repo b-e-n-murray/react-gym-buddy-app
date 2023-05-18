@@ -112,7 +112,7 @@
   border-radius: 3px;
   width: 800px;
   height: fit-content;
-  background: #0092ca;
+  background: #222831;
   margin-left: 20px;
 }
 
@@ -130,7 +130,7 @@
   font-weight: 700;
   text-align: center;
   padding: 7px;
-  background: #3a4750;
+  background: #0092ca;
 }
 
 .workout-summary {
@@ -141,7 +141,7 @@
   width: 800px;
   height: fit-content;
   width: 500px;
-  background: #0074a2;
+  background: #222831;
   margin-left: 40px;
   font-weight: 700;
   font-size: 24px;
@@ -160,19 +160,18 @@
   color: #fdfdfd;
   height: fit-content;
   font-family: "Permanent Marker", cursive;
-  font-size: 20px;
+  font-size: 25px;
   text-align: center;
   font-weight: 700;
   padding: 20px;
-  background: #0074a2;
   border-radius: 10px;
-  margin-left: 190px;
+  margin-left: 160px;
   cursor: pointer;
   transition: all 0.3s ease 0s;
 }
 
 .generateButton:hover {
-  background-color: #0092ca;
+  background-color: rgb(98, 96, 219);
 }
 
 .generateButton:active {
@@ -184,21 +183,37 @@
   color: #222831;
   width: max-content;
   margin-top: 40px;
-  font-size: large;
+  font-size: x-large;
+  margin-left: 20px;
 }
 
 .post-gen-page button {
-  margin-left: none;
-  font-size: small;
-  margin-top: 10px;
+  color: #fdfdfd;
+  height: fit-content;
+  font-family: "Permanent Marker", cursive;
+  font-size: 25px;
+  text-align: center;
+  font-weight: 700;
+  padding: 20px;
+  border-radius: 10px;
+  margin-left: 400px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.post-gen-page button:hover {
+  background-color: rgb(98, 96, 219);
 }
 
 .generator-page-ctn h2 {
   color: #222831;
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Permanent Marker", cursive;
   margin-left: 15px;
   position: absolute;
   text-shadow: 1px 1px #0092ca;
+  font-size: 40px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 @layer components {
