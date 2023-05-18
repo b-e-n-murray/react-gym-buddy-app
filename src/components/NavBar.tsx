@@ -22,11 +22,7 @@ function NavBar(): JSX.Element {
             </Link>
           </div>
           <div className="link-container">
-            <Link
-              className="nav-link"
-              onClick={comingSoonAlert}
-              to="/generator"
-            >
+            <Link className="nav-link" to="/set-tracker">
               Set/Rep Tracker
             </Link>
           </div>

@@ -34,6 +34,7 @@ function UserPrompts(): JSX.Element {
     const fetchedExercisesData = await axios.get(
       `${url}/exercises/${targetMuscles}`
     );
+    // try-catch error handling
     console.log("fetched: ", fetchedExercisesData);
     const exerciseArr = fetchedExercisesData.data;
     if (filterExercises(equips, goal, exerciseArr).length === 0) {
