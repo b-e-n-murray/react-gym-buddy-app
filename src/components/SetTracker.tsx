@@ -115,6 +115,26 @@ function SetTracker(): JSX.Element {
     return setData;
   }
 
+  function addSetToExercise(id: number) {
+    setExerciseList((prevState) => {
+      const updatedExercises = prevState.map((exercise) => {
+        if (exercise.id === id) {
+          return {
+            ...exercise,
+            sets: addNewSet(exercise.sets),
+          };
+        }
+        return exercise;
+      });
+      return updatedExercises;
+    });
+  }
+
+  function addNewSet(setData: Record<string, number>) {
+    const newSetNum: number = Object.entries(setData).length + 1
+    setData[newSetNum] = 0
+    return setData 
+  }
   return (
     <>
       <h1 className="font-marker justify-center text-6xl text-center mt-4 mb-3">
@@ -222,6 +242,7 @@ function SetTracker(): JSX.Element {
                               </tr>
                             </tbody>
                           </table>
+                          <button onClick={() => addSetToExercise(exercise.id)}>+</button>
                         </td>
                         <td className="border-none p-3">
                           <textarea
