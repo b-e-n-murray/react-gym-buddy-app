@@ -158,13 +158,13 @@ function SetTracker(): JSX.Element {
       </h4>
       <div className="flex justify-center">
         <div className=" flex justify-center mt-6">
-          <table className="table-auto border-none">
+          <table className="border-none">
             <thead>
               <tr className="border-b">
                 <th className="border-none"></th>
                 <th className="text-2xl w-300">Exercise</th>
                 <th className="text-2xl w-400">Reps</th>
-                <th className="text-2xl w-400 border-none">Notes</th>
+                <th className="text-2xl w-300 border-none">Notes</th>
               </tr>
             </thead>
             <tbody>
@@ -172,16 +172,16 @@ function SetTracker(): JSX.Element {
                 return (
                   <>
                     {exercise.editMode ? (
-                      <tr className="border-b" key={exercise.id}>
+                      <tr className="border-b h-150" key={exercise.id}>
                         <td className="p-2 items-center justify-center">
                           <button
-                            className="border border-slate-200 h-50 w-50 mt-10 mr-2 rounded-full text-center text-3xl place-content-center bg-white"
+                            className="border border-slate-200 h-50 w-50 mr-2 rounded-full text-center text-3xl place-content-center bg-white"
                             onClick={() => toggleEditMode(exercise.id)}
                           >
                             ✔️
                           </button>
                         </td>
-                        <td className="p-2 items-center justify-center border-none">
+                        <td className="p-2 flex items-center justify-center border-none mt-5">
                           <input
                             placeholder={
                               exercise.name === ""
@@ -196,8 +196,8 @@ function SetTracker(): JSX.Element {
                             }
                           ></input>
                         </td>
-                        <td className="p-2 items-center justify-center border-none">
-                          <table className="table-auto">
+                        <td>
+                          <table className="">
                             <thead>
                               <tr>
                                 {Object.entries(exercise.sets).map(
@@ -205,7 +205,7 @@ function SetTracker(): JSX.Element {
                                     return (
                                       <th
                                         key={setNum}
-                                        className="w-90 border-b border-slate-700 text-xl"
+                                        className="w-90 mr-2 border-b border-slate-700 text-xl"
                                       >
                                         {`Set ${setNum}`}
                                       </th>
@@ -219,10 +219,10 @@ function SetTracker(): JSX.Element {
                                 {Object.entries(exercise.sets).map(
                                   ([setNum, reps]) => {
                                     return (
-                                      <>
+                                      <td>
                                         <input
-                                          className="justify-center w-40 border border-slate-400"
-                                          maxLength={3}
+                                          className="w-40 border border-slate-400 ml-4 mt-1"
+                                          type="number"
                                           placeholder={
                                             reps === 0
                                               ? "0"
@@ -237,18 +237,21 @@ function SetTracker(): JSX.Element {
                                             )
                                           }
                                         ></input>
-                                      </>
+                                      </td>
                                     );
                                   }
                                 )}
                               </tr>
                             </tbody>
                           </table>
-                          <button onClick={() => addSetToExercise(exercise.id)}>
+                          <button
+                            className="border border-slate-200 h-30 w-30 rounded-full text-center text-xl place-content-center bg-white"
+                            onClick={() => addSetToExercise(exercise.id)}
+                          >
                             +
                           </button>
                         </td>
-                        <td className="p-2 items-center justify-center border-none">
+                        <td className="p-2 flex items-center justify-center border-none">
                           <textarea
                             className="border border-black-200 w-200"
                             value={exercise.notes === "" ? "" : exercise.notes}
@@ -267,20 +270,20 @@ function SetTracker(): JSX.Element {
                         </td>
                       </tr>
                     ) : (
-                      <tr className="border-b" key={exercise.id}>
+                      <tr className="border-b h-150" key={exercise.id}>
                         <td>
                           <button
-                            className="border border-slate-200 h-50 w-50 mt-10 mr-2 text-2xl rounded-full bg-white"
+                            className="border border-slate-200 h-50 w-50 mr-2 text-2xl rounded-full bg-white"
                             onClick={() => toggleEditMode(exercise.id)}
                           >
                             ✏️
                           </button>
                         </td>
-                        <td className="border-none p-3">
+                        <td className="p-2 flex items-center justify-center border-none">
                           <p>{exercise.name}</p>
                         </td>
                         <td className="flex justify-center">
-                          <table className="table-auto">
+                          <table>
                             <thead>
                               <tr>
                                 {Object.entries(exercise.sets).map(
@@ -309,12 +312,12 @@ function SetTracker(): JSX.Element {
                             </tbody>
                           </table>
                         </td>
-                        <td className="border-none p-3">
+                        <td className="border-none">
                           <div>{exercise.notes}</div>
                         </td>
                         <td className="border-none">
                           <button
-                            className="font-ubuntu bg-race-blue border border-obsidian mt-1 rounded-full p-3"
+                            className="font-ubuntu bg-race-blue border border-obsidian rounded-full p-3"
                             onClick={() => removeExercise(exercise.id)}
                           >
                             - Remove exercise
